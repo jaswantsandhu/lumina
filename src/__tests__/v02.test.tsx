@@ -155,3 +155,10 @@ describe("Chart options", () => {
     expect(line.plotOptions?.series?.stacking).toBe("normal");
   });
 });
+
+describe("DropdownMenu layout", () => {
+  it("does not stretch inside a flex container (menu stays under the trigger)", () => {
+    const css = require("node:fs").readFileSync(require("node:path").join(__dirname, "../components/Dropdown.css"), "utf8");
+    expect(css).toMatch(/\.lm-dropdown \{[^}]*align-self: flex-start/);
+  });
+});
