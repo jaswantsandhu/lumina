@@ -155,3 +155,4 @@ describe("Chart options", () => {
     expect(line.plotOptions?.series?.stacking).toBe("normal");
   });
 });
+
