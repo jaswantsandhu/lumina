@@ -26,7 +26,7 @@ import { tokens, vars } from "../tokens";
 
 describe("tokens", () => {
   it("exposes values and CSS variable references", () => {
-    expect(tokens.color.palette.indigo["600"]).toBe("#5448e3");
+    expect(tokens.color.palette.pink["700"]).toBe("#be185d");
     expect(vars["color-accent"]).toBe("var(--lm-color-accent)");
     expect(vars["space-4"]).toBe("var(--lm-space-4)");
   });

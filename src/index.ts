@@ -11,10 +11,12 @@ export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 export { Button, IconButton, type ButtonProps, type IconButtonProps, type ButtonVariant, type ButtonSize } from "./components/Button";
 export { Spinner, type SpinnerProps } from "./components/Spinner";
 
-// Forms
+// Forms (FileUpload and FileDownload handle files)
 export { Field, useField, type FieldProps } from "./components/Field";
 export { Input, Textarea, Select, type InputProps, type TextareaProps, type SelectProps } from "./components/Input";
 export { Checkbox, Switch, type CheckboxProps, type SwitchProps } from "./components/Checkbox";
+export { FileUpload, formatBytes, type FileUploadProps, type UploadFile } from "./components/FileUpload";
+export { FileDownload, type FileDownloadProps, type DownloadSource } from "./components/FileDownload";
 
 // Data display
 export { Badge, type BadgeProps, type Tone } from "./components/Badge";
@@ -23,6 +25,8 @@ export { Table, THead, TBody, TR, TH, TD } from "./components/Table";
 export { Avatar, type AvatarProps } from "./components/Avatar";
 export { List, ListItem, type ListItemProps } from "./components/List";
 export { CodeBlock, type CodeBlockProps } from "./components/CodeBlock";
+export { CodeView, type CodeViewProps } from "./components/CodeView";
+export { DataTable, type Column, type DataTableProps } from "./components/DataTable";
 export { EmptyState, Skeleton, type EmptyStateProps, type SkeletonProps } from "./components/EmptyState";
 
 // Feedback & overlays
@@ -30,6 +34,7 @@ export { Alert, type AlertProps } from "./components/Alert";
 export { ToastProvider, useToast, type ToastOptions } from "./components/Toast";
 export { Tooltip, type TooltipProps } from "./components/Tooltip";
 export { Dialog, type DialogProps } from "./components/Dialog";
+export { DropdownMenu, type DropdownMenuProps, type DropdownItem } from "./components/Dropdown";
 
 // Navigation
 export { Tabs, TabPanel, type TabItem, type TabsProps } from "./components/Tabs";

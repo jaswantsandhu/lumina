@@ -1,0 +1,9 @@
+.lm-datatable { display: flex; flex-direction: column; gap: var(--lm-space-2); }
+.lm-datatable__sort { display: inline-flex; align-items: center; gap: var(--lm-space-1); border: none; background: none; padding: 0; font: inherit; color: inherit; text-transform: inherit; letter-spacing: inherit; cursor: pointer; }
+.lm-datatable__sort:hover { color: var(--lm-color-text); }
+.lm-datatable__arrow { opacity: 0.3; }
+.lm-datatable__arrow--active { opacity: 1; color: var(--lm-color-accent); }
+.lm-datatable__row--clickable { cursor: pointer; }
+.lm-datatable__pager { display: flex; align-items: center; justify-content: flex-end; gap: var(--lm-space-2); font-size: var(--lm-font-size-sm); color: var(--lm-color-text-muted); }
+.lm-datatable__count { margin-right: auto; }
+.lm-datatable__page { font-variant-numeric: tabular-nums; }

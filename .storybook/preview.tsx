@@ -42,13 +42,14 @@ const preview: Preview = {
       },
     },
   },
-  initialGlobals: { theme: "light" },
+  // Follows the OS by default; use the Theme toolbar button to force light or dark.
+  initialGlobals: { theme: "system" },
   parameters: {
     layout: "fullscreen",
     backgrounds: { disable: true },
     controls: { expanded: true, matchers: { color: /(background|color)$/i } },
     a11y: { test: "error" },
-    options: { storySort: { order: ["Introduction", "Foundations", "Layout", "Actions", "Forms", "Data display", "Feedback", "Navigation", "Patterns"] } },
+    options: { storySort: { order: ["Introduction", "Foundations", "Layout", "Actions", "Forms", "Files", "Data display", "Charts", "Feedback", "Navigation", "Patterns"] } },
   },
 };
 

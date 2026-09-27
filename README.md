@@ -3,7 +3,7 @@
 Design tokens and accessible React components. Lumina is the design system for [agentteam](https://github.com/jaswantsandhu/agentteam), and works in any React 18+ app.
 
 - **Tokens first:** colour, type, spacing, radius, shadow, motion and z-index as `--lm-*` CSS variables, generated from one [`tokens.json`](src/tokens/tokens.json), with a typed TypeScript export.
-- **Light and dark:** follows the OS, or is set explicitly with `data-theme`.
+- **Light and dark:** follows the OS, or is set explicitly with `data-theme` on `<html>` or on any element (a light panel inside a dark page works). Storybook's **Foundations → Dark mode** shows both side by side.
 - **Accessible by default:** native elements, labelled fields, visible focus, keyboard support, live regions. Every Storybook story passes axe (no serious or critical violations) in both themes.
 - **Plain CSS:** no runtime styling library. Classes are prefixed `lm-`, and `className` and `style` pass through.
 
@@ -51,7 +51,7 @@ Tokens in your own CSS or inline styles:
 ```ts
 import { vars, tokens } from "@jaswantsandhu/lumina/tokens";
 vars["color-accent"]; // "var(--lm-color-accent)"
-tokens.color.palette.indigo["600"]; // "#5448e3"
+tokens.color.palette.pink["700"]; // "#be185d" (the accent)
 ```
 
 ## Components
@@ -61,19 +61,38 @@ tokens.color.palette.indigo["600"]; // "#5448e3"
 | Layout and type | `Stack`, `Text`, `Heading`, `Code`, `Kbd`, `Divider`, `PageHeader` |
 | Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; loading), `IconButton`, `Spinner` |
 | Forms | `Field` (label, hint, error, required), `Input`, `Textarea`, `Select`, `Checkbox`, `Switch` |
-| Data display | `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Table` (+ `THead`, `TBody`, `TR`, `TH`, `TD`), `Avatar`, `List`, `ListItem`, `CodeBlock`, `EmptyState`, `Skeleton` |
-| Feedback and overlays | `Alert`, `ToastProvider` + `useToast`, `Tooltip`, `Dialog` |
+| Files | `FileUpload` (drag and drop, type/size limits, progress, errors), `FileDownload` (text, Blob, generated data or URL) |
+| Data display | `DataTable` (sorting, pagination, selection, loading and empty states), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting, line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
+| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut on Highcharts, themed with tokens |
+| Feedback and overlays | `Alert`, `ToastProvider` + `useToast`, `Tooltip`, `Dialog`, `DropdownMenu` |
 | Navigation | `Tabs` + `TabPanel`, `AppShell`, `SidebarBrand`, `SidebarFooter`, `NavSection`, `NavItem` |
 | Theme | `useTheme`, `ThemeToggle` |
 
 Browse them all, with props and live controls, in Storybook.
+
+## Charts
+
+Charts use [Highcharts](https://www.highcharts.com/) through a separate entry point, so apps without charts don't need it:
+
+```sh
+npm install highcharts highcharts-react-official
+```
+
+```tsx
+import { Chart } from "@jaswantsandhu/lumina/charts";
+
+<Chart type="line" title="Tokens per day" categories={["Mon", "Tue", "Wed"]} series={[{ name: "coder", data: [1200, 1900, 1500] }]} valueSuffix=" tokens" />
+```
+
+Colours, fonts, grid and tooltips come from the tokens (`--lm-color-chart-1…6` for series). Charts re-theme when light/dark changes. Pass `options` to merge in any Highcharts option. Highcharts needs a [commercial licence](https://shop.highcharts.com/) for non-personal use.
 
 ## Tokens
 
 | Group | Variables | Notes |
 |-------|-----------|-------|
 | Semantic colour | `--lm-color-{bg, surface, surface-raised, surface-sunken, overlay, border, border-strong, text, text-muted, text-subtle, accent, accent-hover, accent-soft, on-accent, focus, success, warning, danger, info, *-soft, *-text, *-solid, on-solid}` | Use these in UI: they switch with the theme. `*-solid` colours carry white (`on-solid`) text at WCAG AA. |
-| Palette | `--lm-{indigo, slate, green, amber, red, sky}-{shade}` | Raw colours. Avoid in components. |
+| Chart and code | `--lm-color-chart-{1…6}`, `--lm-color-code-{keyword, string, number, function, tag, attr}` | Themed per light/dark. |
+| Palette | `--lm-{pink, indigo, slate, green, amber, red, sky}-{shade}` (pink is the accent) | Raw colours. Avoid in components. |
 | Type | `--lm-font-family-{sans, mono}`, `--lm-font-size-{xs…4xl}`, `--lm-font-weight-*`, `--lm-font-line-height-*` | |
 | Space | `--lm-space-{0…16}` (dots become underscores: `--lm-space-1_5`) | 4px base. |
 | Radius, shadow | `--lm-radius-{none, sm, md, lg, xl, full}`, `--lm-shadow-{sm, md, lg}` | Shadows differ per theme. |

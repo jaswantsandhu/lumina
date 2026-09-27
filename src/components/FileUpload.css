@@ -1,0 +1,20 @@
+.lm-upload { display: flex; flex-direction: column; gap: var(--lm-space-3); }
+.lm-upload__zone { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--lm-space-1); padding: var(--lm-space-8) var(--lm-space-4); border: 1.5px dashed var(--lm-color-border-strong); border-radius: var(--lm-radius-lg); background: var(--lm-color-surface); color: var(--lm-color-text-muted); text-align: center; cursor: pointer; transition: border-color var(--lm-motion-duration-fast), background var(--lm-motion-duration-fast); }
+.lm-upload__zone:hover, .lm-upload__zone--dragging { border-color: var(--lm-color-accent); background: var(--lm-color-accent-soft); }
+.lm-upload__zone--disabled { opacity: 0.55; cursor: not-allowed; }
+.lm-upload__icon { font-size: 1.5rem; color: var(--lm-color-accent); }
+.lm-upload__label { font-weight: var(--lm-font-weight-medium); color: var(--lm-color-text); }
+.lm-upload__hint { font-size: var(--lm-font-size-sm); }
+.lm-upload__errors { margin: 0; padding-left: var(--lm-space-5); color: var(--lm-color-danger-text); font-size: var(--lm-font-size-sm); }
+.lm-upload__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--lm-space-2); }
+.lm-upload__file { display: flex; align-items: center; gap: var(--lm-space-3); padding: var(--lm-space-2) var(--lm-space-3); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-md); background: var(--lm-color-surface); }
+.lm-upload__file--error { border-color: var(--lm-color-danger); }
+.lm-upload__file-icon { color: var(--lm-color-text-muted); }
+.lm-upload__file-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.lm-upload__file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: var(--lm-font-weight-medium); }
+.lm-upload__file-meta { font-size: var(--lm-font-size-xs); color: var(--lm-color-text-muted); }
+.lm-upload__file--error .lm-upload__file-meta { color: var(--lm-color-danger-text); }
+.lm-upload__progress { height: 4px; border-radius: var(--lm-radius-full); background: var(--lm-color-surface-sunken); overflow: hidden; }
+.lm-upload__progress > span { display: block; height: 100%; background: var(--lm-color-accent); transition: width var(--lm-motion-duration-normal); }
+.lm-upload__remove { border: none; background: none; color: var(--lm-color-text-muted); cursor: pointer; font-size: 1.1rem; line-height: 1; padding: var(--lm-space-1); border-radius: var(--lm-radius-sm); }
+.lm-upload__remove:hover { color: var(--lm-color-text); background: var(--lm-color-surface-sunken); }
