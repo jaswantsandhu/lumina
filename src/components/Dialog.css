@@ -11,3 +11,6 @@
 .lm-dialog__close:hover { color: var(--lm-color-text); background: var(--lm-color-surface-sunken); }
 .lm-dialog__footer { display: flex; justify-content: flex-end; gap: var(--lm-space-2); }
 @keyframes lm-dialog-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+@media (max-width: 720px) {
+  .lm-dialog__panel { padding: var(--lm-space-4); }
+}
