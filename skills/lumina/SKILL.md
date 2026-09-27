@@ -18,7 +18,7 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 ## Pick the right component
 | Need | Use |
 |------|-----|
-| Page frame with sidebar | `AppShell` with `sidebar={<>SidebarBrand, NavSection>NavItem…, SidebarFooter</>}` |
+| Page frame with sidebar | `AppShell` with `title` (shown in the phone top bar) and `sidebar={<>SidebarBrand, NavSection>NavItem…, SidebarFooter</>}`. Below 720px the sidebar becomes a drawer that closes when a NavItem is chosen |
 | Page title and actions | `PageHeader title description actions` |
 | Vertical or horizontal spacing | `Stack direction gap` (never margins between siblings) |
 | Text | `Heading level`, `Text size tone weight truncate`, `Code`, `Kbd` |
@@ -55,7 +55,7 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 
 ## Example
 ```tsx
-<AppShell sidebar={<><SidebarBrand>✦ agentteam</SidebarBrand><NavSection label="Team"><NavItem active>Chat</NavItem><NavItem count={2}>Approvals</NavItem></NavSection></>}>
+<AppShell title="✦ agentteam" sidebar={<><SidebarBrand>✦ agentteam</SidebarBrand><NavSection label="Team"><NavItem active>Chat</NavItem><NavItem count={2}>Approvals</NavItem></NavSection></>}>
   <div style={{ padding: "var(--lm-space-8)" }}>
     <PageHeader title="Tasks" description="Work assigned to the demo team." actions={<Button variant="primary">Assign task</Button>} />
     {tasks.length === 0 ? (

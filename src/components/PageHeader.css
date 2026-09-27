@@ -3,3 +3,7 @@
 .lm-page-header__title { margin: 0; font-size: var(--lm-font-size-2xl); font-weight: var(--lm-font-weight-semibold); letter-spacing: -0.015em; line-height: var(--lm-font-line-height-tight); }
 .lm-page-header__description { margin: 0; color: var(--lm-color-text-muted); max-width: 44rem; }
 .lm-page-header__actions { display: flex; gap: var(--lm-space-2); flex-wrap: wrap; }
+@media (max-width: 720px) {
+  .lm-page-header__title { font-size: var(--lm-font-size-xl); }
+  .lm-page-header__actions { width: 100%; }
+}

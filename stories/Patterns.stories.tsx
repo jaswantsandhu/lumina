@@ -27,7 +27,7 @@ export const ChatScreen: StoryObj = {
     const [page, setPage] = useState("Chat");
     return (
       <div style={{ margin: "-1.5rem" }}>
-        <AppShell
+        <AppShell title="✦ agentteam"
           sidebar={
             <>
               <SidebarBrand>
