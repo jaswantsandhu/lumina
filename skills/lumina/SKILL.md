@@ -26,9 +26,13 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 | Form control | Always inside `Field label hint error required`: `Input`, `Textarea` (`mono` for code/prompts), `Select`, `Checkbox label`, `Switch checked onCheckedChange` |
 | Status | `Badge tone` (`success`, `warning`, `danger`, `info`, `accent`, `neutral`). `dot` for live states |
 | Group of content | `Card` + `CardHeader title description actions`, `CardFooter` for actions |
-| Rows of records | `Table`/`THead`/`TBody`/`TR`/`TH`/`TD` (`numeric` for numbers) |
+| Rows of records | `DataTable columns rows getRowId` (sortable columns, `pageSize`, `selectedIds`/`onSelectionChange`, `loading`, `empty`). Simple static tables: `Table`/`THead`/`TBody`/`TR`/`TH`/`TD` |
+| Charts | `Chart type series categories title` from `@jaswantsandhu/lumina/charts` (line, spline, area + `stacked`, column, bar, pie, donut). Never hard-code chart colours: the tokens theme them |
+| Upload files | `FileUpload files onFilesChange accept maxSize maxFiles multiple` (controlled; set `status`/`progress` on each file while uploading) |
+| Download a file | `FileDownload filename data` (text, Blob, or a function) or `href` |
+| Source code | `CodeView code language title lineNumbers highlightLines`. Plain output/logs: `CodeBlock` |
+| Menu of actions | `DropdownMenu trigger={(p) => <Button {...p}>…</Button>} items=[{label, onSelect, danger}, {type:"separator"}]` |
 | Selectable list (threads, items) | `List` + `ListItem title meta selected leading trailing` |
-| Code or logs | `CodeBlock code language` |
 | Nothing to show | `EmptyState title description action` (one primary Button) |
 | Loading | `Skeleton` for content, `Spinner` for small inline waits, `Button loading` for actions |
 | Message in the page | `Alert tone title action onDismiss` |

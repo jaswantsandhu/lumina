@@ -1,6 +1,4 @@
-.lm-avatar { --lm-avatar-hue: 240; display: inline-grid; place-items: center; flex-shrink: 0; overflow: hidden; border-radius: var(--lm-radius-full); font-weight: var(--lm-font-weight-semibold); color: hsl(var(--lm-avatar-hue) 55% 30%); background: hsl(var(--lm-avatar-hue) 70% 90%); user-select: none; }
-[data-theme="dark"] .lm-avatar { color: hsl(var(--lm-avatar-hue) 70% 85%); background: hsl(var(--lm-avatar-hue) 35% 25%); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .lm-avatar { color: hsl(var(--lm-avatar-hue) 70% 85%); background: hsl(var(--lm-avatar-hue) 35% 25%); } }
+.lm-avatar { --lm-avatar-hue: 240; display: inline-grid; place-items: center; flex-shrink: 0; overflow: hidden; border-radius: var(--lm-radius-full); font-weight: var(--lm-font-weight-semibold); color: hsl(var(--lm-avatar-hue) 60% var(--lm-color-avatar-lightness-fg)); background: hsl(var(--lm-avatar-hue) var(--lm-color-avatar-saturation-bg) var(--lm-color-avatar-lightness-bg)); user-select: none; }
 .lm-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .lm-avatar--sm { width: 1.5rem; height: 1.5rem; font-size: 0.625rem; }
 .lm-avatar--md { width: 2rem; height: 2rem; font-size: var(--lm-font-size-xs); }

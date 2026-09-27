@@ -34,6 +34,7 @@ const themed = (theme) => {
   const out = {};
   for (const [k, v] of Object.entries(tokens.color.semantic[theme])) out[`--lm-color-${k}`] = resolve(v);
   for (const [k, v] of Object.entries(tokens.shadow[theme])) out[`--lm-shadow-${k}`] = v;
+  tokens.color.chart[theme].forEach((v, i) => (out[`--lm-color-chart-${i + 1}`] = resolve(v)));
   return out;
 };
 const light = themed("light");
