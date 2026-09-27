@@ -1,4 +1,5 @@
-.lm-dropdown { position: relative; display: inline-flex; }
+/* Never stretch in a flex/grid parent: the menu is positioned from the trigger's box. */
+.lm-dropdown { position: relative; display: inline-flex; align-self: flex-start; justify-self: start; height: max-content; width: max-content; }
 .lm-dropdown__menu { position: absolute; top: calc(100% + 4px); z-index: var(--lm-z-dropdown); min-width: 12rem; padding: var(--lm-space-1); background: var(--lm-color-surface-raised); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-md); box-shadow: var(--lm-shadow-lg); animation: lm-menu-in var(--lm-motion-duration-normal) var(--lm-motion-easing-emphasized); }
 .lm-dropdown__menu--start { left: 0; }
 .lm-dropdown__menu--end { right: 0; }
