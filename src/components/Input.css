@@ -1,0 +1,27 @@
+.lm-input {
+  width: 100%; height: var(--lm-size-control-md); padding: 0 var(--lm-space-3);
+  background: var(--lm-color-surface); color: var(--lm-color-text);
+  border: 1px solid var(--lm-color-border-strong); border-radius: var(--lm-radius-md);
+  font-size: var(--lm-font-size-md);
+  transition: border-color var(--lm-motion-duration-fast), box-shadow var(--lm-motion-duration-fast);
+}
+.lm-input::placeholder { color: var(--lm-color-text-subtle); }
+.lm-input:hover:not(:disabled) { border-color: var(--lm-color-text-subtle); }
+.lm-input:focus-visible, .lm-input:focus { outline: none; border-color: var(--lm-color-focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--lm-color-focus) 25%, transparent); }
+.lm-input[aria-invalid="true"] { border-color: var(--lm-color-danger); }
+.lm-input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--lm-color-danger) 20%, transparent); }
+.lm-input:disabled { opacity: 0.6; cursor: not-allowed; background: var(--lm-color-surface-sunken); }
+.lm-input--sm { height: var(--lm-size-control-sm); font-size: var(--lm-font-size-sm); padding: 0 var(--lm-space-2); }
+.lm-input--lg { height: var(--lm-size-control-lg); font-size: var(--lm-font-size-lg); }
+.lm-textarea { height: auto; min-height: 5.5rem; padding: var(--lm-space-2) var(--lm-space-3); line-height: var(--lm-font-line-height-normal); resize: vertical; }
+.lm-textarea--mono { font-family: var(--lm-font-family-mono); font-size: var(--lm-font-size-sm); }
+.lm-select { appearance: none; padding-right: var(--lm-space-8); cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 16px) 55%, calc(100% - 11px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+.lm-input-group { position: relative; display: flex; align-items: center; width: 100%; }
+.lm-input-group .lm-input { flex: 1; }
+.lm-input-group__adornment { position: absolute; display: flex; color: var(--lm-color-text-subtle); pointer-events: none; }
+.lm-input-group__adornment:first-child { left: var(--lm-space-3); }
+.lm-input-group__adornment:last-child { right: var(--lm-space-3); }
+.lm-input-group__adornment:first-child ~ .lm-input { padding-left: var(--lm-space-8); }
+.lm-input-group .lm-input:not(:last-child) { padding-right: var(--lm-space-8); }

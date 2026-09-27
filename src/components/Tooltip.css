@@ -1,0 +1,5 @@
+.lm-tooltip-anchor { position: relative; display: inline-flex; }
+.lm-tooltip { position: absolute; left: 50%; z-index: var(--lm-z-tooltip); transform: translateX(-50%) translateY(2px); padding: var(--lm-space-1) var(--lm-space-2); border-radius: var(--lm-radius-sm); background: var(--lm-slate-900); color: var(--lm-slate-50); font-size: var(--lm-font-size-xs); line-height: var(--lm-font-line-height-snug); white-space: nowrap; max-width: 18rem; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity var(--lm-motion-duration-fast), transform var(--lm-motion-duration-fast); }
+.lm-tooltip--top { bottom: calc(100% + 6px); }
+.lm-tooltip--bottom { top: calc(100% + 6px); }
+.lm-tooltip--open { opacity: 1; visibility: visible; transform: translateX(-50%); }

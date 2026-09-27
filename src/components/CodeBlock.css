@@ -1,0 +1,4 @@
+.lm-codeblock { border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-md); background: var(--lm-color-surface-sunken); overflow: hidden; min-width: 0; }
+.lm-codeblock__header { display: flex; justify-content: space-between; align-items: center; padding: var(--lm-space-1) var(--lm-space-3); border-bottom: 1px solid var(--lm-color-border); font-size: var(--lm-font-size-xs); color: var(--lm-color-text-muted); text-transform: uppercase; letter-spacing: 0.04em; min-height: 1.75rem; }
+.lm-codeblock__copy { border: none; background: none; color: var(--lm-color-accent); cursor: pointer; font-size: var(--lm-font-size-xs); text-transform: none; letter-spacing: 0; padding: var(--lm-space-1); }
+.lm-codeblock__pre { margin: 0; padding: var(--lm-space-3); overflow: auto; font-family: var(--lm-font-family-mono); font-size: var(--lm-font-size-sm); line-height: var(--lm-font-line-height-relaxed); white-space: pre-wrap; word-break: break-word; }

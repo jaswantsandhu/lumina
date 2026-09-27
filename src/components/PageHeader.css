@@ -1,0 +1,5 @@
+.lm-page-header { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--lm-space-4); flex-wrap: wrap; margin-bottom: var(--lm-space-5); }
+.lm-page-header__text { display: flex; flex-direction: column; gap: var(--lm-space-1); min-width: 0; }
+.lm-page-header__title { margin: 0; font-size: var(--lm-font-size-2xl); font-weight: var(--lm-font-weight-semibold); letter-spacing: -0.015em; line-height: var(--lm-font-line-height-tight); }
+.lm-page-header__description { margin: 0; color: var(--lm-color-text-muted); max-width: 44rem; }
+.lm-page-header__actions { display: flex; gap: var(--lm-space-2); flex-wrap: wrap; }

@@ -1,0 +1,18 @@
+.lm-check { display: inline-flex; align-items: flex-start; gap: var(--lm-space-2); cursor: pointer; color: var(--lm-color-text); }
+.lm-check__box { appearance: none; margin: 0.15em 0 0; width: 1rem; height: 1rem; flex-shrink: 0; border: 1px solid var(--lm-color-border-strong); border-radius: var(--lm-radius-sm); background: var(--lm-color-surface); display: grid; place-content: center; cursor: pointer; transition: background var(--lm-motion-duration-fast), border-color var(--lm-motion-duration-fast); }
+.lm-check__box::after { content: ""; width: 0.55rem; height: 0.3rem; border: 2px solid var(--lm-color-on-accent); border-top: none; border-right: none; transform: rotate(-45deg) translate(1px, -1px) scale(0); transition: transform var(--lm-motion-duration-fast) var(--lm-motion-easing-emphasized); }
+.lm-check__box:checked { background: var(--lm-color-accent); border-color: var(--lm-color-accent); }
+.lm-check__box:checked::after { transform: rotate(-45deg) translate(1px, -1px) scale(1); }
+.lm-check__box:disabled { opacity: 0.5; cursor: not-allowed; }
+.lm-check__text { display: flex; flex-direction: column; gap: 2px; }
+.lm-check__label { font-size: var(--lm-font-size-md); }
+.lm-check__description { font-size: var(--lm-font-size-sm); color: var(--lm-color-text-muted); }
+
+.lm-switch { display: inline-flex; align-items: center; gap: var(--lm-space-2); }
+.lm-switch__track { position: relative; width: 2.25rem; height: 1.25rem; flex-shrink: 0; border-radius: var(--lm-radius-full); border: none; padding: 0; background: var(--lm-color-border-strong); cursor: pointer; transition: background var(--lm-motion-duration-normal) var(--lm-motion-easing-standard); }
+.lm-switch__track[aria-checked="true"] { background: var(--lm-color-accent); }
+.lm-switch__thumb { position: absolute; top: 2px; left: 2px; width: 1rem; height: 1rem; border-radius: 50%; background: #fff; box-shadow: var(--lm-shadow-sm); transition: transform var(--lm-motion-duration-normal) var(--lm-motion-easing-emphasized); }
+.lm-switch__track[aria-checked="true"] .lm-switch__thumb { transform: translateX(1rem); }
+.lm-switch--disabled { opacity: 0.55; }
+.lm-switch--disabled .lm-switch__track { cursor: not-allowed; }
+.lm-switch__label { cursor: pointer; }

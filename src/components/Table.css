@@ -1,0 +1,9 @@
+.lm-table-wrap { overflow-x: auto; background: var(--lm-color-surface); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-lg); }
+.lm-table { width: 100%; border-collapse: collapse; font-size: var(--lm-font-size-md); }
+.lm-table__th { text-align: left; font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-semibold); text-transform: uppercase; letter-spacing: 0.04em; color: var(--lm-color-text-muted); padding: var(--lm-space-2) var(--lm-space-3); background: var(--lm-color-surface-sunken); border-bottom: 1px solid var(--lm-color-border); white-space: nowrap; }
+.lm-table__td { padding: var(--lm-space-2_5, 0.625rem) var(--lm-space-3); border-bottom: 1px solid var(--lm-color-border); vertical-align: middle; }
+.lm-table tbody tr:last-child .lm-table__td { border-bottom: none; }
+.lm-table tbody tr:hover { background: color-mix(in srgb, var(--lm-color-surface-sunken) 60%, transparent); }
+.lm-table__row--selected { background: var(--lm-color-accent-soft); }
+.lm-table__td--muted { color: var(--lm-color-text-muted); }
+.lm-table__td--numeric { text-align: right; font-variant-numeric: tabular-nums; }
