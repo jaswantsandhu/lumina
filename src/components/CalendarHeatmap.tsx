@@ -27,14 +27,18 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 export function CalendarHeatmap({ data, end, weeks: fixedWeeks, label, format = (v) => String(v), weekStartsMonday = true, className }: CalendarHeatmapProps) {
   // Without a fixed number of weeks, fill the container's width (like a year view).
   const box = useRef<HTMLElement>(null);
-  const [fit, setFit] = useState(26);
+  const [width, setWidth] = useState(0);
   useEffect(() => {
-    if (fixedWeeks || !box.current || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(([e]) => setFit(Math.max(4, Math.min(53, Math.floor((e.contentRect.width - 26) / 14)))));
+    if (!box.current || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(([e]) => setWidth(e.contentRect.width));
     ro.observe(box.current);
     return () => ro.disconnect();
-  }, [fixedWeeks]);
-  const weeks = fixedWeeks ?? fit;
+  }, []);
+  const gap = 3;
+  const left = 26;
+  // More weeks as the width grows (up to a year); then bigger squares (up to 18px) to fill it.
+  const weeks = fixedWeeks ?? (width ? Math.max(4, Math.min(53, Math.floor((width - left) / 14))) : 26);
+  const cell = width ? Math.max(10, Math.min(18, Math.floor((width - left) / weeks) - gap)) : 11;
   const endDate = end ? new Date(`${end}T00:00:00Z`) : new Date(`${iso(new Date())}T00:00:00Z`);
   const dow = (d: Date) => (weekStartsMonday ? (d.getUTCDay() + 6) % 7 : d.getUTCDay());
   const start = new Date(endDate.getTime() - ((weeks - 1) * 7 + dow(endDate)) * 864e5);
@@ -42,16 +46,15 @@ export function CalendarHeatmap({ data, end, weeks: fixedWeeks, label, format = 
   const max = Math.max(0, ...data.map((d) => d.value));
   // 0 = none, 1-4 = quartiles of the max.
   const level = (v: number) => (v <= 0 || max === 0 ? 0 : Math.min(4, Math.ceil((v / max) * 4)));
-  const cell = 11;
-  const gap = 3;
-  const left = 26;
   const top = 16;
   const days: { date: string; v: number; col: number; row: number; future: boolean }[] = [];
   for (let d = new Date(start), i = 0; i < weeks * 7; i++, d = new Date(d.getTime() + 864e5)) {
     const date = iso(d);
     days.push({ date, v: values.get(date) ?? 0, col: Math.floor(i / 7), row: i % 7, future: d > endDate });
   }
-  const months = days.filter((d) => d.row === 0 && (d.col === 0 || d.date.slice(8) <= "07")).map((d) => ({ col: d.col, label: MONTHS[Number(d.date.slice(5, 7)) - 1] }));
+  // A label where each month starts; drop one that would run into the next.
+  const starts = days.filter((d) => d.row === 0 && (d.col === 0 || d.date.slice(8) <= "07")).map((d) => ({ col: d.col, label: MONTHS[Number(d.date.slice(5, 7)) - 1] }));
+  const months = starts.filter((m, i) => !starts[i + 1] || starts[i + 1].col - m.col >= 3);
   const total = days.reduce((n, d) => n + d.v, 0);
   const active = days.filter((d) => d.v > 0).length;
   const width = left + weeks * (cell + gap);

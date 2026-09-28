@@ -12,3 +12,4 @@
 .lm-calendar__legend span:first-child { margin-right: 4px; }
 .lm-calendar__legend span:last-child { margin-left: 4px; }
 .lm-calendar__key { width: 11px; height: 11px; border-radius: 2px; }
+.lm-calendar__scroll svg { display: block; }

@@ -1,6 +1,6 @@
 {
   "name": "@jaswantsandhu/lumina",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Lumina: design tokens and accessible React components.",
   "license": "UNLICENSED",
   "type": "module",
