@@ -65,7 +65,8 @@ tokens.color.palette.pink["700"]; // "#be185d" (the accent)
 | Data display | `StatCard` (value, hint, trend), `Progress` (meter with warning/danger thresholds), `Timeline` (steps with status and expandable detail, live), `DataTable` (sorting, pagination, selection, loading and empty states; rows become cards on phones), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting, line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
 | Overlays | `Dialog`, `Drawer` (side panel for an item's details or a long form; full width on phones), `ConfirmDialog` (ask before destructive actions), `DropdownMenu`, `Tooltip`. Menus and combobox lists render in a portal, so scroll areas never clip them |
 | Details | `DescriptionList` (labelled values: rows, or a grid of columns; empty values show "—") |
-| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut on Highcharts, themed with tokens. `GraphChart`: node-link graph on a pan/zoom canvas with node kinds, pending nodes, selection and click |
+| Small charts | `Sparkline` (line/area/bar, for stat cards and table cells), `Gauge` (ring or half, thresholds → warning/danger), `CalendarHeatmap` (activity by day). Plain SVG, no Highcharts |
+| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut, scatter, bubble, heatmap, treemap, sankey, and combos (per-series `type`, second axis with `yAxis: 1`) on Highcharts, themed with tokens. `palette`: categorical, colorblind, sequential (follows the accent), diverging. `GraphChart`: node-link graph on a pan/zoom canvas with node kinds, pending nodes, selection and click |
 | Feedback and overlays | `Alert`, `ToastProvider` + `useToast`, `Tooltip`, `Dialog`, `DropdownMenu` |
 | Navigation | `Tabs` + `TabPanel`, `AppShell`, `SidebarBrand`, `SidebarFooter`, `NavSection`, `NavItem` |
 | Chat | `ChatThread` (header, messages that stay scrolled to the bottom, composer), `ChatMessage` (yours as bubbles, others as cards), `ChatComposer` (Enter sends, Shift+Enter new line, grows) |
@@ -111,6 +112,26 @@ import { GraphChart } from "@jaswantsandhu/lumina/charts";
 - Accessible: the canvas is a focusable, labelled region with keyboard pan and zoom; Tab reveals a list of node buttons (same `onNodeClick`), and a hidden table lists every link for screen readers.
 
 Highcharts needs a [commercial licence](https://shop.highcharts.com/) for non-personal use.
+
+## Themes
+
+Light/dark (`useTheme`, `ThemeToggle`) plus appearance settings, as attributes on `<html>` so every component follows:
+
+| Setting | Attribute | Values |
+|---|---|---|
+| Accent | `data-accent` | `rose` (default), `indigo`, `violet`, `sky`, `teal`, `emerald`, `amber`, `slate` |
+| Density | `data-density` | `compact`, default, `comfortable` (control heights and common gaps) |
+| Corners | `data-radius` | `sharp`, default, `round` |
+
+```tsx
+import { ThemeCustomizer, useAppearance } from "@jaswantsandhu/lumina";
+
+const [appearance, setAppearance] = useAppearance(); // stored in localStorage
+setAppearance({ accent: "indigo", density: "compact" });
+<ThemeCustomizer /> // mode, accent swatches, density, corners
+```
+
+Every accent keeps white text on the accent at WCAG AA in light mode (dark text in dark mode). Charts, sparklines, gauges and the calendar re-theme when the accent or mode changes.
 
 ## Tokens
 

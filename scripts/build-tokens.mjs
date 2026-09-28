@@ -30,12 +30,32 @@ flat("--lm-motion", tokens.motion);
 flat("--lm-z", tokens.z);
 flat("--lm-size", tokens.size);
 
+// Sequential chart scale from an accent's palette (light: pale → strong; dark: dim → bright).
+const ACCENT_PALETTE = { rose: "pink", indigo: "indigo", emerald: "green", amber: "amber", sky: "sky", violet: "violet", teal: "teal", slate: "slate" };
+const sequential = (accent, theme) => {
+  const shades = ["100", "200", "300", "400", "500", "600", "700", "800", "900"];
+  const order = theme === "light" ? shades : [...shades].reverse();
+  const out = {};
+  order.forEach((sh, i) => (out[`--lm-color-chart-seq-${i + 1}`] = palette[ACCENT_PALETTE[accent]][sh]));
+  return out;
+};
+
 const themed = (theme) => {
   const out = {};
   for (const [k, v] of Object.entries(tokens.color.semantic[theme])) out[`--lm-color-${k}`] = resolve(v);
   for (const [k, v] of Object.entries(tokens.shadow[theme])) out[`--lm-shadow-${k}`] = v;
   tokens.color.chart[theme].forEach((v, i) => (out[`--lm-color-chart-${i + 1}`] = resolve(v)));
+  tokens.color["chart-colorblind"][theme].forEach((v, i) => (out[`--lm-color-chart-cb-${i + 1}`] = resolve(v)));
+  tokens.color["chart-diverging"][theme].forEach((v, i) => (out[`--lm-color-chart-div-${i + 1}`] = resolve(v)));
+  Object.assign(out, sequential("rose", theme));
   return out;
+};
+
+// Accent overrides for one theme: accent semantic tokens, chart colour 1, sequential scale.
+const accentVars = (name, theme) => {
+  const out = {};
+  for (const [k, v] of Object.entries(tokens.accent[name][theme])) out[k === "chart-1" ? "--lm-color-chart-1" : `--lm-color-${k}`] = resolve(v);
+  return { ...out, ...sequential(name, theme) };
 };
 const light = themed("light");
 const dark = themed("dark");
@@ -48,6 +68,22 @@ const css = [
   `@media (prefers-color-scheme: dark) {\n${block(':root:not([data-theme="light"])', dark, "  color-scheme: dark;\n").replace(/^/gm, "  ")}}\n`,
   block('[data-theme="dark"]', dark, "  color-scheme: dark;\n"),
   block('[data-theme="light"]', light, "  color-scheme: light;\n"),
+  "/* Accent themes: data-accent on <html> (rose is the default). */",
+  ...Object.keys(tokens.accent)
+    .filter((k) => !k.startsWith("$"))
+    .flatMap((name) => [
+      block(`[data-accent="${name}"]`, accentVars(name, "light")),
+      `@media (prefers-color-scheme: dark) {\n${block(`:root:not([data-theme="light"])[data-accent="${name}"]`, accentVars(name, "dark")).replace(/^/gm, "  ")}}\n`,
+      block(`[data-theme="dark"][data-accent="${name}"]`, accentVars(name, "dark")),
+      block(`[data-theme="light"][data-accent="${name}"]`, accentVars(name, "light")),
+    ]),
+  "/* Density and corner radius: data-density and data-radius on <html>. */",
+  ...Object.entries(tokens.density)
+    .filter(([k]) => !k.startsWith("$"))
+    .map(([name, vals]) => block(`[data-density="${name}"]`, Object.fromEntries(Object.entries(vals).map(([k, v]) => [`--lm-${k}`, v])))),
+  ...Object.entries(tokens["radius-scale"])
+    .filter(([k]) => !k.startsWith("$"))
+    .map(([name, vals]) => block(`[data-radius="${name}"]`, Object.fromEntries(Object.entries(vals).map(([k, v]) => [`--lm-radius-${k}`, v])))),
 ].join("\n");
 writeFileSync(new URL("../src/tokens/tokens.css", import.meta.url), css);
 

@@ -147,7 +147,7 @@ function useThemeVersion() {
   useEffect(() => {
     const bump = () => setVersion((v) => v + 1);
     const observer = new MutationObserver(bump);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "data-accent", "class"] });
     const media = typeof window.matchMedia === "function" ? window.matchMedia("(prefers-color-scheme: dark)") : null;
     media?.addEventListener("change", bump);
     return () => {

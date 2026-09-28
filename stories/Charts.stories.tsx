@@ -33,3 +33,109 @@ export const PieAndDonut: StoryObj = {
     </Stack>
   ),
 };
+
+// ---------- Lumina 0.8 ----------
+
+export const ComboTwoAxes: StoryObj = {
+  name: "Combo: columns + line, two axes",
+  render: () =>
+    wrap(
+      <Chart
+        type="column"
+        title="Tokens and cost per day"
+        categories={days}
+        yTitle="Tokens"
+        yTitle2="Cost ($)"
+        series={[
+          { name: "Tokens", data: [120, 190, 150, 240, 210, 60, 40] },
+          { name: "Cost", data: [1.2, 1.9, 1.5, 2.6, 2.2, 0.6, 0.4], type: "line", yAxis: 1 },
+        ]}
+      />,
+    ),
+};
+
+export const ScatterAndBubble: StoryObj = {
+  name: "Scatter and bubble",
+  render: () => (
+    <Stack direction="row" gap="4" wrap>
+      {wrap(<Chart type="scatter" title="Duration vs tokens" xTitle="Seconds" yTitle="Tokens" series={[{ name: "Runs", data: [[12, 800], [30, 2100], [45, 2600], [8, 400], [60, 5200], [25, 1500]] }]} legend={false} height={280} />)}
+      {wrap(<Chart type="bubble" title="Teams: agents, runs and cost" xTitle="Agents" yTitle="Runs" series={[{ name: "Teams", data: [{ x: 3, y: 120, z: 12, name: "Acme" }, { x: 5, y: 300, z: 40, name: "Orion" }, { x: 2, y: 60, z: 6, name: "Labs" }] }]} legend={false} height={280} />)}
+    </Stack>
+  ),
+};
+
+const hours = ["00", "04", "08", "12", "16", "20"];
+export const Heatmap: StoryObj = {
+  name: "Heatmap: day × hour",
+  render: () =>
+    wrap(
+      <Chart
+        type="heatmap"
+        title="Runs by day and hour"
+        categories={days}
+        yCategories={hours}
+        series={[{ name: "Runs", data: days.flatMap((_, x) => hours.map((_, y) => [x, y, Math.round(Math.abs(Math.sin(x * 1.7 + y)) * (x < 5 ? 20 : 6))])) }]}
+        height={300}
+      />,
+    ),
+};
+
+export const Treemap: StoryObj = {
+  render: () =>
+    wrap(
+      <Chart
+        type="treemap"
+        title="Tokens by team and model"
+        series={[
+          {
+            name: "Tokens",
+            data: [
+              { id: "acme", name: "Acme" },
+              { id: "orion", name: "Orion" },
+              { name: "Large model", parent: "acme", value: 620 },
+              { name: "Small model", parent: "acme", value: 210 },
+              { name: "Large model", parent: "orion", value: 340 },
+              { name: "Own provider", parent: "orion", value: 150 },
+            ],
+          },
+        ]}
+        height={320}
+      />,
+    ),
+};
+
+export const Sankey: StoryObj = {
+  render: () =>
+    wrap(
+      <Chart
+        type="sankey"
+        title="How work flows through the team"
+        series={[
+          {
+            name: "Tasks",
+            data: [
+              { from: "Assigned", to: "Lead", weight: 40 },
+              { from: "Lead", to: "Coder", weight: 18 },
+              { from: "Lead", to: "Researcher", weight: 12 },
+              { from: "Lead", to: "Answered directly", weight: 10 },
+              { from: "Coder", to: "Succeeded", weight: 15 },
+              { from: "Coder", to: "Failed", weight: 3 },
+              { from: "Researcher", to: "Succeeded", weight: 12 },
+            ],
+          },
+        ]}
+        height={320}
+      />,
+    ),
+};
+
+export const Palettes: StoryObj = {
+  name: "Palettes",
+  render: () => (
+    <Stack gap="4">
+      {(["categorical", "colorblind", "diverging", "sequential"] as const).map((p) =>
+        wrap(<Chart key={p} type="column" title={`${p} palette`} palette={p} categories={["A", "B", "C"]} series={Array.from({ length: p === "categorical" || p === "colorblind" ? 8 : 9 }, (_, i) => ({ name: `Series ${i + 1}`, data: [3 + (i % 3), 5 - (i % 4), 4] }))} height={240} />),
+      )}
+    </Stack>
+  ),
+};

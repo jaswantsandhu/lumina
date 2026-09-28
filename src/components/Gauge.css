@@ -1,0 +1,10 @@
+.lm-gauge { position: relative; display: inline-flex; flex-direction: column; align-items: center; }
+.lm-gauge__track { stroke: var(--lm-color-surface-sunken); }
+.lm-gauge__bar { stroke: var(--lm-color-accent); transition: d var(--lm-motion-duration-slow) var(--lm-motion-easing-standard); }
+.lm-gauge--warning .lm-gauge__bar { stroke: var(--lm-color-warning); }
+.lm-gauge--danger .lm-gauge__bar { stroke: var(--lm-color-danger); }
+.lm-gauge__center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; pointer-events: none; }
+.lm-gauge--half .lm-gauge__center { inset: auto 0 0 0; justify-content: flex-end; }
+.lm-gauge__value { font-size: var(--lm-font-size-xl); font-weight: var(--lm-font-weight-semibold); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.lm-gauge__caption { font-size: var(--lm-font-size-xs); color: var(--lm-color-text-muted); }
+.lm-sparkline { display: block; width: 100%; overflow: visible; }

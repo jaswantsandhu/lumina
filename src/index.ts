@@ -52,4 +52,9 @@ export { Tabs, TabPanel, type TabItem, type TabsProps } from "./components/Tabs"
 export { AppShell, SidebarBrand, SidebarFooter, NavSection, NavItem, type AppShellProps, type NavItemProps } from "./components/AppShell";
 
 // Theme
-export { useTheme, ThemeToggle, type ThemePreference } from "./components/Theme";
+export { useTheme, ThemeToggle, useAppearance, applyAppearance, ThemeCustomizer, ACCENTS, type ThemePreference, type Accent, type Density, type Radius, type Appearance } from "./components/Theme";
+
+// Small charts (no Highcharts needed)
+export { Sparkline, type SparklineProps } from "./components/Sparkline";
+export { Gauge, type GaugeProps } from "./components/Gauge";
+export { CalendarHeatmap, type CalendarHeatmapProps } from "./components/CalendarHeatmap";
