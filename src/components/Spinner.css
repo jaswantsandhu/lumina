@@ -1,0 +1,5 @@
+.lm-spinner { display: inline-block; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: lm-spin 0.7s linear infinite; opacity: 0.85; vertical-align: middle; flex-shrink: 0; }
+.lm-spinner--sm { width: 0.875rem; height: 0.875rem; }
+.lm-spinner--md { width: 1.125rem; height: 1.125rem; }
+.lm-spinner--lg { width: 1.75rem; height: 1.75rem; border-width: 3px; }
+@keyframes lm-spin { to { transform: rotate(360deg); } }

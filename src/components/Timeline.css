@@ -1,0 +1,16 @@
+.lm-timeline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.lm-timeline__item { border-left: 2px solid var(--lm-color-border); padding-left: var(--lm-space-3); margin-left: var(--lm-space-2); }
+.lm-timeline__head { display: flex; align-items: center; gap: var(--lm-space-2); min-width: 0; padding: var(--lm-space-1_5) 0; font-size: var(--lm-font-size-sm); }
+.lm-timeline__head--button { width: 100%; border: none; background: none; color: inherit; font: inherit; font-size: var(--lm-font-size-sm); text-align: left; cursor: pointer; border-radius: var(--lm-radius-sm); }
+.lm-timeline__head--button:hover .lm-timeline__title { text-decoration: underline; }
+.lm-timeline__head--button:focus-visible { outline: 2px solid var(--lm-color-focus); outline-offset: 2px; }
+.lm-timeline__icon { flex-shrink: 0; width: 1.25rem; text-align: center; }
+.lm-timeline__title { font-weight: var(--lm-font-weight-medium); white-space: nowrap; }
+.lm-timeline__preview { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--lm-color-text-muted); }
+.lm-timeline__meta { margin-left: auto; flex-shrink: 0; color: var(--lm-color-text-subtle); font-size: var(--lm-font-size-xs); font-variant-numeric: tabular-nums; }
+.lm-timeline__detail { margin: 0 0 var(--lm-space-2) var(--lm-space-7, 1.75rem); padding: var(--lm-space-2); max-height: 16rem; overflow: auto; border-radius: var(--lm-radius-sm); background: var(--lm-color-surface-sunken); font-family: var(--lm-font-family-mono); font-size: var(--lm-font-size-xs); white-space: pre-wrap; word-break: break-word; }
+/* Only the icon pulses: fading the text would break contrast. */
+.lm-timeline__item--live .lm-timeline__icon { animation: lm-timeline-pulse 1.6s ease-in-out infinite; }
+.lm-timeline__empty { color: var(--lm-color-text-muted); font-size: var(--lm-font-size-sm); }
+@keyframes lm-timeline-pulse { 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { .lm-timeline__item--live .lm-timeline__icon { animation: none; } }

@@ -1,0 +1,29 @@
+.lm-app { display: flex; height: 100vh; overflow: hidden; background: var(--lm-color-bg); }
+.lm-app__sidebar { width: var(--lm-size-sidebar); flex-shrink: 0; display: flex; flex-direction: column; gap: var(--lm-space-4); padding: var(--lm-space-4) var(--lm-space-3); background: var(--lm-color-surface); border-right: 1px solid var(--lm-color-border); overflow-y: auto; }
+.lm-app__main { flex: 1; min-width: 0; overflow: auto; }
+.lm-app__topbar, .lm-app__backdrop { display: none; }
+.lm-app__menu { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; margin-left: calc(-1 * var(--lm-space-2)); border: none; border-radius: var(--lm-radius-md); background: none; color: var(--lm-color-text); cursor: pointer; }
+.lm-app__menu:hover { background: var(--lm-color-surface-sunken); }
+.lm-app__title { display: flex; align-items: center; gap: var(--lm-space-2); min-width: 0; font-weight: var(--lm-font-weight-bold); font-size: var(--lm-font-size-lg); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.lm-sidebar__brand { display: flex; align-items: center; gap: var(--lm-space-2); padding: 0 var(--lm-space-2); font-weight: var(--lm-font-weight-bold); font-size: var(--lm-font-size-lg); letter-spacing: -0.01em; }
+.lm-sidebar__footer { margin-top: auto; display: flex; flex-direction: column; gap: var(--lm-space-2); padding-top: var(--lm-space-3); border-top: 1px solid var(--lm-color-border); }
+.lm-nav { display: flex; flex-direction: column; gap: 1px; }
+.lm-nav__label { padding: 0 var(--lm-space-2); margin-bottom: var(--lm-space-1); font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-semibold); text-transform: uppercase; letter-spacing: 0.05em; color: var(--lm-color-text-subtle); }
+.lm-nav__item { display: flex; align-items: center; gap: var(--lm-space-2); width: 100%; height: 2rem; padding: 0 var(--lm-space-2); border: none; border-radius: var(--lm-radius-md); background: none; color: var(--lm-color-text-muted); font-weight: var(--lm-font-weight-medium); text-align: left; cursor: pointer; transition: background var(--lm-motion-duration-fast), color var(--lm-motion-duration-fast); }
+.lm-nav__item:hover { background: var(--lm-color-surface-sunken); color: var(--lm-color-text); }
+.lm-nav__item--active { background: var(--lm-color-accent-soft); color: var(--lm-color-accent-soft-text); }
+.lm-nav__icon { display: flex; width: 1rem; justify-content: center; }
+.lm-nav__icon svg { width: 1rem; height: 1rem; }
+.lm-nav__text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lm-nav__count { min-width: 1.25rem; height: 1.25rem; padding: 0 var(--lm-space-1_5); border-radius: var(--lm-radius-full); background: var(--lm-color-danger-solid); color: var(--lm-color-on-solid); font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-semibold); display: grid; place-items: center; }
+@media (max-width: 720px) {
+  .lm-app { flex-direction: column; height: 100dvh; }
+  .lm-app__topbar { display: flex; align-items: center; gap: var(--lm-space-2); flex-shrink: 0; height: 3.25rem; padding: 0 var(--lm-space-4); padding-top: env(safe-area-inset-top); background: var(--lm-color-surface); border-bottom: 1px solid var(--lm-color-border); position: relative; z-index: 3; }
+  .lm-app__sidebar { position: fixed; top: 0; bottom: 0; left: 0; z-index: 4; width: min(85vw, 18rem); padding-top: calc(var(--lm-space-4) + env(safe-area-inset-top)); padding-bottom: calc(var(--lm-space-4) + env(safe-area-inset-bottom)); box-shadow: var(--lm-shadow-lg); transform: translateX(-100%); visibility: hidden; transition: transform var(--lm-motion-duration-slow) var(--lm-motion-easing-standard), visibility 0s linear var(--lm-motion-duration-slow); }
+  .lm-app--open .lm-app__sidebar { transform: none; visibility: visible; transition: transform var(--lm-motion-duration-slow) var(--lm-motion-easing-standard); }
+  .lm-app__backdrop { display: block; position: fixed; inset: 0; z-index: 3; background: var(--lm-color-overlay); opacity: 0; pointer-events: none; transition: opacity var(--lm-motion-duration-slow); }
+  .lm-app--open .lm-app__backdrop { opacity: 1; pointer-events: auto; }
+  .lm-app__main { padding-bottom: env(safe-area-inset-bottom); }
+  .lm-nav__item { height: 2.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .lm-app__sidebar, .lm-app__backdrop { transition: none !important; } }

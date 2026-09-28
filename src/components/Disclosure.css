@@ -1,0 +1,9 @@
+.lm-disclosure__summary { display: flex; align-items: center; gap: var(--lm-space-2); width: 100%; min-width: 0; padding: var(--lm-space-1) 0; border: none; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: var(--lm-radius-sm); }
+.lm-disclosure__summary:focus-visible { outline: 2px solid var(--lm-color-focus); outline-offset: 2px; }
+.lm-disclosure__chevron { flex-shrink: 0; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--lm-color-text-muted); border-bottom: 2px solid var(--lm-color-text-muted); transform: rotate(-45deg); transition: transform var(--lm-motion-duration-fast); margin-right: var(--lm-space-1); }
+.lm-disclosure--open > .lm-disclosure__summary .lm-disclosure__chevron { transform: rotate(45deg); }
+.lm-disclosure__content { padding-top: var(--lm-space-2); }
+.lm-disclosure--card { border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-md); background: var(--lm-color-surface-sunken); }
+.lm-disclosure--card > .lm-disclosure__summary { padding: var(--lm-space-2) var(--lm-space-3); }
+.lm-disclosure--card > .lm-disclosure__content { padding: 0 var(--lm-space-3) var(--lm-space-3); }
+@media (prefers-reduced-motion: reduce) { .lm-disclosure__chevron { transition: none; } }

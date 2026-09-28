@@ -1,0 +1,9 @@
+.lm-list { display: flex; flex-direction: column; gap: 2px; }
+.lm-list__item { display: flex; align-items: center; gap: var(--lm-space-2); width: 100%; text-align: left; padding: var(--lm-space-2) var(--lm-space-3); border: 1px solid transparent; border-radius: var(--lm-radius-md); background: none; color: var(--lm-color-text); cursor: pointer; transition: background var(--lm-motion-duration-fast); }
+.lm-list__item:hover { background: var(--lm-color-surface-sunken); }
+.lm-list__item--selected { background: var(--lm-color-surface); border-color: var(--lm-color-border); box-shadow: var(--lm-shadow-sm); }
+.lm-list__text { display: flex; flex-direction: column; min-width: 0; flex: 1; gap: 1px; }
+.lm-list__title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--lm-font-size-md); }
+.lm-list__item--selected .lm-list__title { font-weight: var(--lm-font-weight-medium); }
+.lm-list__meta { font-size: var(--lm-font-size-xs); color: var(--lm-color-text-subtle); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lm-list__leading, .lm-list__trailing { display: flex; align-items: center; flex-shrink: 0; }

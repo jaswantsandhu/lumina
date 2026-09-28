@@ -1,0 +1,12 @@
+.lm-badge { --lm-badge-fg: var(--lm-color-text-muted); --lm-badge-bg: var(--lm-color-surface-sunken); --lm-badge-solid: var(--lm-slate-600);
+  display: inline-flex; align-items: center; gap: var(--lm-space-1_5); height: 1.375rem; padding: 0 var(--lm-space-2);
+  border-radius: var(--lm-radius-full); font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-medium); white-space: nowrap; line-height: 1;
+  color: var(--lm-badge-fg); background: var(--lm-badge-bg); border: 1px solid transparent; }
+.lm-badge--accent { --lm-badge-fg: var(--lm-color-accent-soft-text); --lm-badge-bg: var(--lm-color-accent-soft); --lm-badge-solid: var(--lm-color-accent-solid); }
+.lm-badge--success { --lm-badge-fg: var(--lm-color-success-text); --lm-badge-bg: var(--lm-color-success-soft); --lm-badge-solid: var(--lm-color-success-solid); }
+.lm-badge--warning { --lm-badge-fg: var(--lm-color-warning-text); --lm-badge-bg: var(--lm-color-warning-soft); --lm-badge-solid: var(--lm-color-warning-solid); }
+.lm-badge--danger { --lm-badge-fg: var(--lm-color-danger-text); --lm-badge-bg: var(--lm-color-danger-soft); --lm-badge-solid: var(--lm-color-danger-solid); }
+.lm-badge--info { --lm-badge-fg: var(--lm-color-info-text); --lm-badge-bg: var(--lm-color-info-soft); --lm-badge-solid: var(--lm-color-info-solid); }
+.lm-badge--outline { background: transparent; border-color: currentColor; }
+.lm-badge--solid { background: var(--lm-badge-solid); color: var(--lm-color-on-solid); }
+.lm-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }

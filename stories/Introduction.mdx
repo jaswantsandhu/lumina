@@ -1,0 +1,27 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Introduction" />
+
+# Lumina
+
+Design tokens and accessible React components.
+
+```bash
+npm install @jaswantsandhu/lumina   # from GitHub Packages
+```
+
+```tsx
+import "@jaswantsandhu/lumina/styles.css";          // once, at the app root
+import { Button, Field, Input } from "@jaswantsandhu/lumina";
+
+<body class="lm-root">…</body>                       // base font, colours, focus ring
+```
+
+## Principles
+
+- **Tokens first.** Every colour, size, radius, shadow and duration is a `--lm-*` CSS variable. Use the **semantic** colours (`--lm-color-text`, `--lm-color-accent`, …), which switch with the theme, rather than the palette.
+- **Light and dark.** The theme follows the OS, or is set with `data-theme="light" | "dark"` on `<html>` (`useTheme()` / `<ThemeToggle>`). Use the **Theme** toolbar button to preview both.
+- **Accessible by default.** Real buttons and form controls, labels wired through `<Field>`, visible focus, keyboard support, and live regions for alerts and toasts. The **Accessibility** panel runs axe on every story.
+- **Plain CSS.** No runtime styling. Classes are prefixed `lm-`, and `className` and `style` pass through.
+
+Browse **Foundations** for the tokens, then each component group.

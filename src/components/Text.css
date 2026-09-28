@@ -1,0 +1,29 @@
+.lm-text { margin: 0; color: var(--lm-color-text); line-height: var(--lm-font-line-height-normal); }
+.lm-text--xs { font-size: var(--lm-font-size-xs); }
+.lm-text--sm { font-size: var(--lm-font-size-sm); }
+.lm-text--md { font-size: var(--lm-font-size-md); }
+.lm-text--lg { font-size: var(--lm-font-size-lg); }
+.lm-text--xl { font-size: var(--lm-font-size-xl); }
+.lm-text--muted { color: var(--lm-color-text-muted); }
+.lm-text--subtle { color: var(--lm-color-text-subtle); }
+.lm-text--accent { color: var(--lm-color-accent); }
+.lm-text--success { color: var(--lm-color-success); }
+.lm-text--warning { color: var(--lm-color-warning-text); }
+.lm-text--danger { color: var(--lm-color-danger); }
+.lm-text--regular { font-weight: var(--lm-font-weight-regular); }
+.lm-text--medium { font-weight: var(--lm-font-weight-medium); }
+.lm-text--semibold { font-weight: var(--lm-font-weight-semibold); }
+.lm-text--bold { font-weight: var(--lm-font-weight-bold); }
+.lm-text--mono { font-family: var(--lm-font-family-mono); font-size: 0.95em; }
+.lm-text--truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.lm-heading { margin: 0; color: var(--lm-color-text); font-weight: var(--lm-font-weight-semibold); letter-spacing: -0.01em; line-height: var(--lm-font-line-height-tight); }
+.lm-heading--sm { font-size: var(--lm-font-size-lg); }
+.lm-heading--md { font-size: var(--lm-font-size-xl); }
+.lm-heading--lg { font-size: var(--lm-font-size-2xl); }
+.lm-heading--xl { font-size: var(--lm-font-size-3xl); letter-spacing: -0.02em; }
+
+.lm-code { font-family: var(--lm-font-family-mono); font-size: 0.9em; background: var(--lm-color-surface-sunken); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-sm); padding: 0.05em 0.35em; }
+.lm-kbd { font-family: var(--lm-font-family-mono); font-size: var(--lm-font-size-xs); background: var(--lm-color-surface); border: 1px solid var(--lm-color-border-strong); border-bottom-width: 2px; border-radius: var(--lm-radius-sm); padding: 0.05em 0.4em; color: var(--lm-color-text-muted); }
+.lm-divider { border: none; border-top: 1px solid var(--lm-color-border); margin: var(--lm-space-3) 0; width: 100%; }
+.lm-divider--vertical { border-top: none; border-left: 1px solid var(--lm-color-border); width: auto; height: auto; align-self: stretch; margin: 0 var(--lm-space-2); }

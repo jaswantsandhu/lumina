@@ -1,0 +1,11 @@
+.lm-progress { width: 100%; height: 0.5rem; border-radius: var(--lm-radius-full); background: var(--lm-color-surface-sunken); overflow: hidden; }
+.lm-progress--sm { height: 0.3125rem; }
+.lm-progress__fill { height: 100%; border-radius: inherit; transition: width var(--lm-motion-duration-normal) var(--lm-motion-easing-standard); }
+.lm-progress__fill--accent { background: var(--lm-color-accent-solid); }
+.lm-progress__fill--warning { background: var(--lm-color-warning-solid); }
+.lm-progress__fill--danger { background: var(--lm-color-danger-solid); }
+.lm-progress-field { display: flex; flex-direction: column; gap: var(--lm-space-1); }
+.lm-progress-field__head { display: flex; justify-content: space-between; gap: var(--lm-space-3); font-size: var(--lm-font-size-sm); }
+.lm-progress-field__label { font-weight: var(--lm-font-weight-medium); min-width: 0; }
+.lm-progress-field__value { color: var(--lm-color-text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .lm-progress__fill { transition: none; } }

@@ -1,0 +1,26 @@
+.lm-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--lm-space-2);
+  height: var(--lm-size-control-md); padding: 0 var(--lm-space-4);
+  border: 1px solid transparent; border-radius: var(--lm-radius-md);
+  font-weight: var(--lm-font-weight-medium); font-size: var(--lm-font-size-md); line-height: 1; white-space: nowrap;
+  cursor: pointer; user-select: none;
+  transition: background var(--lm-motion-duration-fast) var(--lm-motion-easing-standard), border-color var(--lm-motion-duration-fast), color var(--lm-motion-duration-fast), box-shadow var(--lm-motion-duration-fast), transform var(--lm-motion-duration-fast);
+}
+.lm-button:active:not(:disabled) { transform: translateY(1px); }
+.lm-button:disabled { opacity: 0.55; cursor: not-allowed; }
+.lm-button--sm { height: var(--lm-size-control-sm); padding: 0 var(--lm-space-3); font-size: var(--lm-font-size-sm); gap: var(--lm-space-1_5); }
+.lm-button--lg { height: var(--lm-size-control-lg); padding: 0 var(--lm-space-5); font-size: var(--lm-font-size-lg); }
+.lm-button--full { width: 100%; }
+.lm-button--primary { background: var(--lm-color-accent); color: var(--lm-color-on-accent); box-shadow: var(--lm-shadow-sm); }
+.lm-button--primary:hover:not(:disabled) { background: var(--lm-color-accent-hover); }
+.lm-button--secondary { background: var(--lm-color-surface); border-color: var(--lm-color-border-strong); color: var(--lm-color-text); box-shadow: var(--lm-shadow-sm); }
+.lm-button--secondary:hover:not(:disabled) { background: var(--lm-color-surface-sunken); }
+.lm-button--ghost { background: transparent; color: var(--lm-color-text); }
+.lm-button--ghost:hover:not(:disabled) { background: var(--lm-color-surface-sunken); }
+.lm-button--danger { background: var(--lm-color-danger-solid); color: var(--lm-color-on-solid); box-shadow: var(--lm-shadow-sm); }
+.lm-button--danger:hover:not(:disabled) { background: var(--lm-color-danger-solid-hover); }
+.lm-button__label { overflow: hidden; text-overflow: ellipsis; }
+.lm-icon-button { padding: 0; width: var(--lm-size-control-md); }
+.lm-icon-button.lm-button--sm { width: var(--lm-size-control-sm); }
+.lm-icon-button.lm-button--lg { width: var(--lm-size-control-lg); }
+.lm-button svg { width: 1em; height: 1em; flex-shrink: 0; }

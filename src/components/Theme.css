@@ -1,0 +1,3 @@
+.lm-segmented { display: inline-flex; padding: 2px; gap: 2px; border-radius: var(--lm-radius-md); background: var(--lm-color-surface-sunken); border: 1px solid var(--lm-color-border); }
+.lm-segmented__option { border: none; background: none; padding: var(--lm-space-1) var(--lm-space-2); border-radius: calc(var(--lm-radius-md) - 2px); font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-medium); color: var(--lm-color-text-muted); cursor: pointer; }
+.lm-segmented__option[aria-checked="true"] { background: var(--lm-color-surface); color: var(--lm-color-text); box-shadow: var(--lm-shadow-sm); }

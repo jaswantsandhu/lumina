@@ -1,0 +1,2 @@
+.lm-grid { display: grid; }
+@media (max-width: 720px) { .lm-grid--fixed { grid-template-columns: minmax(0, 1fr) !important; } }
