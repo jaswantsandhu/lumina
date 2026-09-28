@@ -27,18 +27,18 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 export function CalendarHeatmap({ data, end, weeks: fixedWeeks, label, format = (v) => String(v), weekStartsMonday = true, className }: CalendarHeatmapProps) {
   // Without a fixed number of weeks, fill the container's width (like a year view).
   const box = useRef<HTMLElement>(null);
-  const [width, setWidth] = useState(0);
+  const [boxWidth, setBoxWidth] = useState(0);
   useEffect(() => {
     if (!box.current || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(([e]) => setWidth(e.contentRect.width));
+    const ro = new ResizeObserver(([e]) => setBoxWidth(e.contentRect.width));
     ro.observe(box.current);
     return () => ro.disconnect();
   }, []);
   const gap = 3;
   const left = 26;
   // More weeks as the width grows (up to a year); then bigger squares (up to 18px) to fill it.
-  const weeks = fixedWeeks ?? (width ? Math.max(4, Math.min(53, Math.floor((width - left) / 14))) : 26);
-  const cell = width ? Math.max(10, Math.min(18, Math.floor((width - left) / weeks) - gap)) : 11;
+  const weeks = fixedWeeks ?? (boxWidth ? Math.max(4, Math.min(53, Math.floor((boxWidth - left) / 14))) : 26);
+  const cell = boxWidth ? Math.max(10, Math.min(18, Math.floor((boxWidth - left) / weeks) - gap)) : 11;
   const endDate = end ? new Date(`${end}T00:00:00Z`) : new Date(`${iso(new Date())}T00:00:00Z`);
   const dow = (d: Date) => (weekStartsMonday ? (d.getUTCDay() + 6) % 7 : d.getUTCDay());
   const start = new Date(endDate.getTime() - ((weeks - 1) * 7 + dow(endDate)) * 864e5);
