@@ -98,6 +98,7 @@ export const LongListWithAction: StoryObj = {
     <div style={{ height: 420, border: "1px solid var(--lm-color-border)" }}>
       <SplitView
         listLabel="Conversations"
+        showDetail={false}
         list={
           <>
             <Button variant="primary" fullWidth>
