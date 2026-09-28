@@ -2,9 +2,11 @@ import { type HTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } fro
 import { cx } from "../utils";
 
 /** A data table in a scrollable, bordered container. */
+// The wrapper scrolls sideways on narrow screens, so it's a focusable, named region
+// that keyboard users can scroll too.
 export function Table({ className, ...rest }: HTMLAttributes<HTMLTableElement>) {
   return (
-    <div className="lm-table-wrap">
+    <div className="lm-table-wrap" tabIndex={0} role="region" aria-label={rest["aria-label"] ?? "Table"}>
       <table className={cx("lm-table", className)} {...rest} />
     </div>
   );

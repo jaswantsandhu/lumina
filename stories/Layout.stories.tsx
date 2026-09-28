@@ -1,5 +1,6 @@
+import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Code, Divider, Heading, Kbd, PageHeader, Stack, Text, Button } from "../src/index";
+import { Button, Card, Code, Divider, Grid, Heading, Kbd, List, ListItem, PageHeader, SplitView, Stack, Text } from "../src/index";
 
 export default { title: "Layout/Typography and layout", tags: ["autodocs"] } satisfies Meta;
 
@@ -50,4 +51,43 @@ export const StackLayout: StoryObj = {
 export const Header: StoryObj = {
   name: "PageHeader",
   render: () => <PageHeader title="Tasks" description="Work assigned to the demo team." actions={<Button variant="primary">Assign task</Button>} />,
+};
+
+export const ResponsiveGrid: StoryObj = {
+  render: () => (
+    <Grid min="10rem">
+      {["Overview", "Chat", "Tasks", "Schedules", "Memory", "Approvals"].map((n) => (
+        <Card key={n}>
+          <Text weight="semibold">{n}</Text>
+        </Card>
+      ))}
+    </Grid>
+  ),
+};
+
+export const ListAndDetail: StoryObj = {
+  parameters: { layout: "fullscreen" },
+  render: function Render() {
+    const items = ["Research options", "Fix flaky test", "Weekly report"];
+    const [selected, setSelected] = useState<string | undefined>();
+    return (
+      <div style={{ height: 420, border: "1px solid var(--lm-color-border)" }}>
+        <SplitView
+          listLabel="Tasks"
+          showDetail={selected !== undefined}
+          onBack={() => setSelected(undefined)}
+          backLabel="All tasks"
+          list={
+            <List aria-label="Tasks">
+              {items.map((i) => (
+                <ListItem key={i} title={i} selected={i === (selected ?? items[0])} onClick={() => setSelected(i)} />
+              ))}
+            </List>
+          }
+        >
+          <PageHeader title={selected ?? items[0]} description="On phones only one pane shows, with a back link." />
+        </SplitView>
+      </div>
+    );
+  },
 };

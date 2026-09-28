@@ -21,12 +21,19 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 | Page frame with sidebar | `AppShell` with `title` (shown in the phone top bar) and `sidebar={<>SidebarBrand, NavSection>NavItem…, SidebarFooter</>}`. Below 720px the sidebar becomes a drawer that closes when a NavItem is chosen |
 | Page title and actions | `PageHeader title description actions` |
 | Vertical or horizontal spacing | `Stack direction gap` (never margins between siblings) |
+| Cards in a responsive grid | `Grid min="16rem"` (or `columns={3}`; one column on phones) |
+| List + detail screen | `SplitView list showDetail onBack backLabel` (both panes on desktop; on phones one pane with a back link). `flushDetail` for chats |
+| Collapsible section | `Disclosure summary defaultOpen` (`variant="card"` for a boxed one) |
 | Text | `Heading level`, `Text size tone weight truncate`, `Code`, `Kbd` |
 | Actions | `Button variant="primary"` (one per view), `"secondary"` (default), `"ghost"` (low emphasis), `"danger"` (destructive). Icon-only: `IconButton aria-label` |
-| Form control | Always inside `Field label hint error required`: `Input`, `Textarea` (`mono` for code/prompts), `Select`, `Checkbox label`, `Switch checked onCheckedChange` |
+| Form control | Always inside `Field label hint error required`: `Input`, `PasswordInput`, `NumberInput value onValueChange min max decimal suffix`, `Combobox value onValueChange options allowCustom` (pick or type), `Textarea` (`mono` for code/prompts), `Select`, `Checkbox label`, `Switch checked onCheckedChange` |
 | Status | `Badge tone` (`success`, `warning`, `danger`, `info`, `accent`, `neutral`). `dot` for live states |
 | Group of content | `Card` + `CardHeader title description actions`, `CardFooter` for actions |
-| Rows of records | `DataTable columns rows getRowId` (sortable columns, `pageSize`, `selectedIds`/`onSelectionChange`, `loading`, `empty`). Simple static tables: `Table`/`THead`/`TBody`/`TR`/`TH`/`TD` |
+| Key numbers | `StatCard label value hint trend` in a `Grid` |
+| Usage against a limit | `Progress value max label valueText` (turns warning at 80%, danger at 100%; `thresholds={null}` for plain progress) |
+| Steps / activity / log | `Timeline aria-label items=[{id, icon, title, preview, status, live, detail, meta}] maxHeight live` |
+| Conversation | `ChatThread header composer scrollKey` with `ChatMessage from="self"\|"other" author avatarName time meta footer` and `ChatComposer value onValueChange onSend` |
+| Rows of records | `DataTable columns rows getRowId` (sortable columns, `pageSize`, `selectedIds`/`onSelectionChange`, `loading`, `empty`; on phones rows become cards: give every column a text `header`, or `mobile="scroll"`). Simple static tables: `Table`/`THead`/`TBody`/`TR`/`TH`/`TD` |
 | Charts | `Chart type series categories title` from `@jaswantsandhu/lumina/charts` (line, spline, area + `stacked`, column, bar, pie, donut). Never hard-code chart colours: the tokens theme them |
 | Upload files | `FileUpload files onFilesChange accept maxSize maxFiles multiple` (controlled; set `status`/`progress` on each file while uploading) |
 | Download a file | `FileDownload filename data` (text, Blob, or a function) or `href` |

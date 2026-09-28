@@ -58,14 +58,15 @@ tokens.color.palette.pink["700"]; // "#be185d" (the accent)
 
 | Group | Components |
 |-------|------------|
-| Layout and type | `Stack`, `Text`, `Heading`, `Code`, `Kbd`, `Divider`, `PageHeader` |
+| Layout and type | `Stack`, `Grid` (responsive columns), `SplitView` (list + detail, one pane on phones), `Text`, `Heading`, `Code`, `Kbd`, `Divider`, `PageHeader`, `Disclosure` (show/hide section) |
 | Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; loading), `IconButton`, `Spinner` |
-| Forms | `Field` (label, hint, error, required), `Input`, `Textarea`, `Select`, `Checkbox`, `Switch` |
+| Forms | `Field` (label, hint, error, required), `Input`, `PasswordInput` (show/hide), `NumberInput` (unit, clamping), `Combobox` (pick or type, filtered, keyboard), `Textarea`, `Select`, `Checkbox`, `Switch` |
 | Files | `FileUpload` (drag and drop, type/size limits, progress, errors), `FileDownload` (text, Blob, generated data or URL) |
-| Data display | `DataTable` (sorting, pagination, selection, loading and empty states), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting, line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
+| Data display | `StatCard` (value, hint, trend), `Progress` (meter with warning/danger thresholds), `Timeline` (steps with status and expandable detail, live), `DataTable` (sorting, pagination, selection, loading and empty states; rows become cards on phones), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting, line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
 | Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut on Highcharts, themed with tokens |
 | Feedback and overlays | `Alert`, `ToastProvider` + `useToast`, `Tooltip`, `Dialog`, `DropdownMenu` |
 | Navigation | `Tabs` + `TabPanel`, `AppShell`, `SidebarBrand`, `SidebarFooter`, `NavSection`, `NavItem` |
+| Chat | `ChatThread` (header, messages that stay scrolled to the bottom, composer), `ChatMessage` (yours as bubbles, others as cards), `ChatComposer` (Enter sends, Shift+Enter new line, grows) |
 | Theme | `useTheme`, `ThemeToggle` |
 
 Browse them all, with props and live controls, in Storybook.

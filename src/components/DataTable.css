@@ -7,3 +7,17 @@
 .lm-datatable__pager { display: flex; align-items: center; justify-content: flex-end; gap: var(--lm-space-2); font-size: var(--lm-font-size-sm); color: var(--lm-color-text-muted); }
 .lm-datatable__count { margin-right: auto; }
 .lm-datatable__page { font-variant-numeric: tabular-nums; }
+/* Phones: rows become cards of "Header: value" lines (mobile="cards"). */
+@media (max-width: 720px) {
+  .lm-datatable--cards .lm-table-wrap { border: none; background: none; overflow: visible; }
+  .lm-datatable--cards .lm-table, .lm-datatable--cards .lm-table tbody { display: block; }
+  .lm-datatable--cards .lm-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .lm-datatable--cards .lm-table tr { display: flex; flex-direction: column; gap: var(--lm-space-1); margin-bottom: var(--lm-space-2); padding: var(--lm-space-3); background: var(--lm-color-surface); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-lg); }
+  .lm-datatable--cards .lm-table tbody tr:hover { background: var(--lm-color-surface); }
+  .lm-datatable--cards .lm-table__row--selected { border-color: var(--lm-color-accent); }
+  .lm-datatable--cards .lm-table__td { display: flex; align-items: baseline; gap: var(--lm-space-2); padding: 0; border: none; text-align: left !important; min-width: 0; overflow-wrap: anywhere; }
+  .lm-datatable--cards .lm-table__td[data-label]::before { content: attr(data-label); flex: 0 0 38%; color: var(--lm-color-text-muted); font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-semibold); text-transform: uppercase; letter-spacing: 0.04em; }
+  .lm-datatable--cards .lm-table__td:not([data-label]) { justify-content: flex-end; }
+  .lm-datatable--cards .lm-table__td:first-child:not([data-label]) { justify-content: flex-start; }
+  .lm-datatable--cards .lm-datatable__pager { flex-wrap: wrap; }
+}

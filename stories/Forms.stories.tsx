@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Button, Checkbox, Field, Input, Select, Stack, Switch, Textarea } from "../src/index";
+import { Button, Checkbox, Combobox, Field, Input, NumberInput, PasswordInput, Select, Stack, Switch, Textarea } from "../src/index";
 
 export default { title: "Forms/Fields", component: Field, tags: ["autodocs"] } satisfies Meta<typeof Field>;
 
@@ -83,4 +83,28 @@ export const CompleteForm: StoryObj = {
       </Stack>
     </form>
   ),
+};
+
+export const MoreInputs: StoryObj = {
+  render: function Render() {
+    const [cpus, setCpus] = useState<number | null>(2);
+    const [model, setModel] = useState("gpt-4.1-mini");
+    return (
+      <Stack gap="4" style={{ maxWidth: 420 }}>
+        <Field label="API key" hint="Stored encrypted; never shown again.">
+          <PasswordInput autoComplete="off" defaultValue="sk-example" />
+        </Field>
+        <Field label="CPUs per agent" hint="0.25 – 8">
+          <NumberInput value={cpus} onValueChange={setCpus} min={0.25} max={8} decimal suffix="cores" />
+        </Field>
+        <Field label="Model" hint="Pick one or type any model id.">
+          <Combobox
+            value={model}
+            onValueChange={setModel}
+            options={[{ value: "gpt-4.1", description: "OpenAI" }, { value: "gpt-4.1-mini", description: "OpenAI" }, { value: "claude-sonnet-4-5", description: "Anthropic" }, "unsloth/Qwen3.8-27B-NVFP4"]}
+          />
+        </Field>
+      </Stack>
+    );
+  },
 };

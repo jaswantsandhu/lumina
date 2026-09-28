@@ -32,8 +32,16 @@ export interface DataTableProps<T> {
   onRowClick?: (row: T) => void;
   empty?: ReactNode;
   defaultSort?: { key: string; direction: "asc" | "desc" };
+  /**
+   * On phones (under 720px): "cards" (default) shows each row as a card of
+   * "Header: value" lines; "scroll" keeps the table and scrolls it sideways.
+   */
+  mobile?: "cards" | "scroll";
   className?: string;
 }
+
+// The text a card shows before a value: the column header if it's plain text.
+const labelOf = (header: ReactNode) => (typeof header === "string" || typeof header === "number" ? String(header) : undefined);
 
 type Sort = { key: string; direction: "asc" | "desc" } | undefined;
 
@@ -47,7 +55,7 @@ function compare(a: unknown, b: unknown): number {
 }
 
 /** A data table with sortable columns, pagination, row selection, loading and empty states. */
-export function DataTable<T>({ columns, rows, getRowId, caption, pageSize = 10, loading, selectedIds, onSelectionChange, onRowClick, empty, defaultSort, className }: DataTableProps<T>) {
+export function DataTable<T>({ columns, rows, getRowId, caption, pageSize = 10, loading, selectedIds, onSelectionChange, onRowClick, empty, defaultSort, mobile = "cards", className }: DataTableProps<T>) {
   const [sort, setSort] = useState<Sort>(defaultSort);
   const [page, setPage] = useState(0);
 
@@ -86,7 +94,7 @@ export function DataTable<T>({ columns, rows, getRowId, caption, pageSize = 10, 
 
   const span = columns.length + (selectable ? 1 : 0);
   return (
-    <div className={cx("lm-datatable", className)}>
+    <div className={cx("lm-datatable", mobile === "cards" && "lm-datatable--cards", className)}>
       <Table aria-label={caption} aria-busy={loading || undefined}>
         <THead>
           <TR>
@@ -135,7 +143,7 @@ export function DataTable<T>({ columns, rows, getRowId, caption, pageSize = 10, 
                       </TD>
                     )}
                     {columns.map((c) => (
-                      <TD key={c.key} style={{ textAlign: c.align }}>
+                      <TD key={c.key} style={{ textAlign: c.align }} data-label={labelOf(c.header)}>
                         {c.render ? c.render(row) : String((row as Record<string, unknown>)[c.key] ?? "")}
                       </TD>
                     ))}

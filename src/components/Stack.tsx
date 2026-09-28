@@ -1,7 +1,7 @@
 import { forwardRef, type CSSProperties, type HTMLAttributes } from "react";
 import { cx } from "../utils";
 
-type Space = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "8" | "10" | "12";
+export type Space = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "8" | "10" | "12";
 
 export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   /** Column (default) or row. */

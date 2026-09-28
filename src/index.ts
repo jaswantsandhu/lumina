@@ -3,7 +3,9 @@
 export { cx } from "./utils";
 
 // Layout & typography
-export { Stack, type StackProps } from "./components/Stack";
+export { Stack, type StackProps, type Space } from "./components/Stack";
+export { Grid, type GridProps } from "./components/Grid";
+export { SplitView, type SplitViewProps } from "./components/SplitView";
 export { Text, Heading, Code, Kbd, Divider, type TextProps, type HeadingProps } from "./components/Text";
 export { PageHeader, type PageHeaderProps } from "./components/PageHeader";
 
@@ -15,6 +17,7 @@ export { Spinner, type SpinnerProps } from "./components/Spinner";
 export { Field, useField, type FieldProps } from "./components/Field";
 export { Input, Textarea, Select, type InputProps, type TextareaProps, type SelectProps } from "./components/Input";
 export { Checkbox, Switch, type CheckboxProps, type SwitchProps } from "./components/Checkbox";
+export { PasswordInput, NumberInput, Combobox, type PasswordInputProps, type NumberInputProps, type ComboboxProps, type ComboboxOption } from "./components/Combobox";
 export { FileUpload, formatBytes, type FileUploadProps, type UploadFile } from "./components/FileUpload";
 export { FileDownload, type FileDownloadProps, type DownloadSource } from "./components/FileDownload";
 
@@ -27,6 +30,11 @@ export { List, ListItem, type ListItemProps } from "./components/List";
 export { CodeBlock, type CodeBlockProps } from "./components/CodeBlock";
 export { CodeView, type CodeViewProps } from "./components/CodeView";
 export { DataTable, type Column, type DataTableProps } from "./components/DataTable";
+export { StatCard, type StatCardProps } from "./components/StatCard";
+export { Progress, type ProgressProps } from "./components/Progress";
+export { Timeline, type TimelineItem, type TimelineProps } from "./components/Timeline";
+export { Disclosure, type DisclosureProps } from "./components/Disclosure";
+export { ChatThread, ChatMessage, ChatComposer, type ChatThreadProps, type ChatMessageProps, type ChatComposerProps } from "./components/Chat";
 export { EmptyState, Skeleton, type EmptyStateProps, type SkeletonProps } from "./components/EmptyState";
 
 // Feedback & overlays
