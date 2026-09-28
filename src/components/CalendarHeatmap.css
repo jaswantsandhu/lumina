@@ -1,12 +1,13 @@
-.lm-calendar { margin: 0; display: flex; flex-direction: column; gap: var(--lm-space-2); min-width: 0; }
+.lm-calendar { margin: 0; width: 100%; display: flex; flex-direction: column; gap: var(--lm-space-2); min-width: 0; }
 .lm-calendar__scroll { overflow-x: auto; }
 .lm-calendar__axis { font-size: 10px; fill: var(--lm-color-text-muted); font-family: var(--lm-font-family-sans); }
 .lm-calendar__day--0 { fill: var(--lm-color-surface-sunken); background: var(--lm-color-surface-sunken); }
+/* Empty days stay visible on dark surfaces. */
+.lm-calendar__day { stroke: var(--lm-color-border); stroke-width: 1; }
 .lm-calendar__day--1 { fill: var(--lm-color-chart-seq-3); background: var(--lm-color-chart-seq-3); }
 .lm-calendar__day--2 { fill: var(--lm-color-chart-seq-5); background: var(--lm-color-chart-seq-5); }
 .lm-calendar__day--3 { fill: var(--lm-color-chart-seq-7); background: var(--lm-color-chart-seq-7); }
 .lm-calendar__day--4 { fill: var(--lm-color-chart-seq-9); background: var(--lm-color-chart-seq-9); }
-.lm-calendar__day { outline: 1px solid color-mix(in srgb, var(--lm-color-border) 60%, transparent); outline-offset: -1px; }
 .lm-calendar__legend { display: flex; align-items: center; justify-content: flex-end; gap: 3px; font-size: var(--lm-font-size-xs); color: var(--lm-color-text-muted); }
 .lm-calendar__legend span:first-child { margin-right: 4px; }
 .lm-calendar__legend span:last-child { margin-left: 4px; }

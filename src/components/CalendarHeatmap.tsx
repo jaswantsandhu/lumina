@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { cx } from "../utils";
 
 export interface CalendarHeatmapProps {
@@ -5,7 +6,7 @@ export interface CalendarHeatmapProps {
   data: { date: string; value: number }[];
   /** Last day shown (default: today). */
   end?: string;
-  /** Weeks shown, ending with `end`'s week (default 26). */
+  /** Weeks shown, ending with `end`'s week. Default: as many as fit the width (up to 53). */
   weeks?: number;
   /** Accessible name, e.g. "Runs per day". */
   label: string;
@@ -23,7 +24,17 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
  * A GitHub-style activity calendar: one square per day, columns are weeks,
  * darker means more. Colours come from the sequential chart palette (follows the accent).
  */
-export function CalendarHeatmap({ data, end, weeks = 26, label, format = (v) => String(v), weekStartsMonday = true, className }: CalendarHeatmapProps) {
+export function CalendarHeatmap({ data, end, weeks: fixedWeeks, label, format = (v) => String(v), weekStartsMonday = true, className }: CalendarHeatmapProps) {
+  // Without a fixed number of weeks, fill the container's width (like a year view).
+  const box = useRef<HTMLElement>(null);
+  const [fit, setFit] = useState(26);
+  useEffect(() => {
+    if (fixedWeeks || !box.current || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(([e]) => setFit(Math.max(4, Math.min(53, Math.floor((e.contentRect.width - 26) / 14)))));
+    ro.observe(box.current);
+    return () => ro.disconnect();
+  }, [fixedWeeks]);
+  const weeks = fixedWeeks ?? fit;
   const endDate = end ? new Date(`${end}T00:00:00Z`) : new Date(`${iso(new Date())}T00:00:00Z`);
   const dow = (d: Date) => (weekStartsMonday ? (d.getUTCDay() + 6) % 7 : d.getUTCDay());
   const start = new Date(endDate.getTime() - ((weeks - 1) * 7 + dow(endDate)) * 864e5);
@@ -47,7 +58,7 @@ export function CalendarHeatmap({ data, end, weeks = 26, label, format = (v) => 
   const height = top + 7 * (cell + gap);
   const dayNames = weekStartsMonday ? ["Mon", "", "Wed", "", "Fri", "", ""] : ["", "Mon", "", "Wed", "", "Fri", ""];
   return (
-    <figure className={cx("lm-calendar", className)}>
+    <figure ref={box as never} className={cx("lm-calendar", className)}>
       <div className="lm-calendar__scroll" tabIndex={0} role="region" aria-label={`${label} (scrolls sideways)`}>
         <svg width={width} height={height} role="img" aria-label={`${label}: ${format(total)} over ${weeks} weeks, on ${active} day${active === 1 ? "" : "s"}`}>
           {months.map((m, i) => (
