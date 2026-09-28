@@ -6,6 +6,6 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ["react", "react-dom", "react/jsx-runtime", "highcharts", "highcharts-react-official"],
+  external: ["react", "react-dom", "react/jsx-runtime", "highcharts", /^highcharts\//, "highcharts-react-official"],
   target: "es2020",
 });

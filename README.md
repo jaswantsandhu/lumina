@@ -63,7 +63,7 @@ tokens.color.palette.pink["700"]; // "#be185d" (the accent)
 | Forms | `Field` (label, hint, error, required), `Input`, `PasswordInput` (show/hide), `NumberInput` (unit, clamping), `Combobox` (pick or type, filtered, keyboard), `Textarea`, `Select`, `Checkbox`, `Switch` |
 | Files | `FileUpload` (drag and drop, type/size limits, progress, errors), `FileDownload` (text, Blob, generated data or URL) |
 | Data display | `StatCard` (value, hint, trend), `Progress` (meter with warning/danger thresholds), `Timeline` (steps with status and expandable detail, live), `DataTable` (sorting, pagination, selection, loading and empty states; rows become cards on phones), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting, line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
-| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut on Highcharts, themed with tokens |
+| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut on Highcharts, themed with tokens. `GraphChart`: force-directed node-link graph with node kinds, pending nodes, selection and click |
 | Feedback and overlays | `Alert`, `ToastProvider` + `useToast`, `Tooltip`, `Dialog`, `DropdownMenu` |
 | Navigation | `Tabs` + `TabPanel`, `AppShell`, `SidebarBrand`, `SidebarFooter`, `NavSection`, `NavItem` |
 | Chat | `ChatThread` (header, messages that stay scrolled to the bottom, composer), `ChatMessage` (yours as bubbles, others as cards), `ChatComposer` (Enter sends, Shift+Enter new line, grows) |
@@ -85,7 +85,29 @@ import { Chart } from "@jaswantsandhu/lumina/charts";
 <Chart type="line" title="Visits per day" categories={["Mon", "Tue", "Wed"]} series={[{ name: "Web", data: [1200, 1900, 1500] }]} valueSuffix=" tokens" />
 ```
 
-Colours, fonts, grid and tooltips come from the tokens (`--lm-color-chart-1…6` for series). Charts re-theme when light/dark changes. Pass `options` to merge in any Highcharts option. Highcharts needs a [commercial licence](https://shop.highcharts.com/) for non-personal use.
+Colours, fonts, grid and tooltips come from the tokens (`--lm-color-chart-1…6` for series). Charts re-theme when light/dark changes. Pass `options` to merge in any Highcharts option. ### GraphChart
+
+A force-directed node-link graph (Highcharts networkgraph) for knowledge graphs, dependencies or org charts:
+
+```tsx
+import { GraphChart } from "@jaswantsandhu/lumina/charts";
+
+<GraphChart
+  label="Team knowledge"
+  nodes={[{ id: "acme", label: "Acme", kind: "topic" }, { id: "runbook", label: "Billing runbook", kind: "doc" }]}
+  links={[{ from: "runbook", to: "acme", label: "mentions" }]}
+  kinds={{ topic: { label: "Topic" }, doc: { label: "Document", color: 1, size: 12 } }}
+  selectedId={selected}
+  onNodeClick={setSelected}
+/>
+```
+
+- `kinds` sets colour (palette index), size and the legend; `pending: true` fades a node (e.g. awaiting review), `dashed: true` dashes a link.
+- Nodes can be dragged; a click calls `onNodeClick`. Show the node's details next to the graph (see the *Knowledge graph with overview* story).
+- Accessible: the graph is named with its node and link counts; Tab reveals a list of node buttons (same `onNodeClick`), and a hidden table lists every link for screen readers.
+- Any change to nodes, links or kinds redraws the layout (networkgraph can't update in place); selection changes don't.
+
+Highcharts needs a [commercial licence](https://shop.highcharts.com/) for non-personal use.
 
 ## Tokens
 

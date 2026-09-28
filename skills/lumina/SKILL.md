@@ -34,7 +34,7 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 | Steps / activity / log | `Timeline aria-label items=[{id, icon, title, preview, status, live, detail, meta}] maxHeight live` |
 | Conversation | `ChatThread header composer scrollKey` with `ChatMessage from="self"\|"other" author avatarName time meta footer` and `ChatComposer value onValueChange onSend` |
 | Rows of records | `DataTable columns rows getRowId` (sortable columns, `pageSize`, `selectedIds`/`onSelectionChange`, `loading`, `empty`; on phones rows become cards: give every column a text `header`, or `mobile="scroll"`). Simple static tables: `Table`/`THead`/`TBody`/`TR`/`TH`/`TD` |
-| Charts | `Chart type series categories title` from `@jaswantsandhu/lumina/charts` (line, spline, area + `stacked`, column, bar, pie, donut). Never hard-code chart colours: the tokens theme them |
+| Charts | `Chart type series categories title` from `@jaswantsandhu/lumina/charts` (line, spline, area + `stacked`, column, bar, pie, donut). Never hard-code chart colours: the tokens theme them. `GraphChart label nodes links kinds selectedId onNodeClick` for node-link graphs (knowledge graphs); keep `nodes`/`links` memoised, and show the clicked node's details beside it |
 | Upload files | `FileUpload files onFilesChange accept maxSize maxFiles multiple` (controlled; set `status`/`progress` on each file while uploading) |
 | Download a file | `FileDownload filename data` (text, Blob, or a function) or `href` |
 | Source code | `CodeView code language title lineNumbers highlightLines`. Plain output/logs: `CodeBlock` |
