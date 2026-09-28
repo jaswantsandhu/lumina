@@ -10,7 +10,7 @@ export default {
     docs: {
       description: {
         component:
-          "A force-directed node-link graph (Highcharts networkgraph) for knowledge graphs and dependencies. Nodes have kinds (colour + legend), can be pending (dashed), and call `onNodeClick`. Keyboard users get a node list (appears on Tab); screen readers also get a links table. Import from `@jaswantsandhu/lumina/charts`.",
+          "A node-link graph on a canvas for knowledge graphs and dependencies. Drag the dotted canvas to pan, drag nodes to rearrange, zoom with the control bar, ctrl/⌘ + wheel, a pinch, or the keyboard (+, −, 0 fits, arrows pan). Labels appear as you zoom in; hovering or selecting a node highlights its neighbours. Nodes have kinds (colour + legend) and can be pending (dashed). Keyboard users also get a node list (appears on Tab) and screen readers a links table. Import from `@jaswantsandhu/lumina/charts`.",
       },
     },
   },
@@ -78,4 +78,29 @@ export const Empty: StoryObj = {
       <GraphChart label="Empty graph" nodes={[]} links={[]} height={200} />
     </Card>
   ),
+};
+
+// A larger graph: labels hide until you zoom in or hover a node.
+const teams = ["Billing", "Search", "Mobile", "Data", "Support", "Security"];
+const big: GraphNode[] = teams.flatMap((t, i) => [
+  { id: t, label: t, kind: "entity" },
+  ...Array.from({ length: 6 }, (_, j) => ({ id: `${t}-${j}`, label: `${t} ${["API", "runbook", "owner", "roadmap", "alerts", "backlog"][j]}`, kind: j === 1 || j === 3 ? "doc" : j === 2 ? "person" : "entity" })),
+  ...(i % 2 ? [{ id: `${t}-p`, label: `${t} idea`, kind: "entity", pending: true }] : []),
+]);
+const bigLinks: GraphLink[] = teams.flatMap((t, i) => [
+  ...Array.from({ length: 6 }, (_, j) => ({ from: `${t}-${j}`, to: t, label: ["part of", "documents", "owns", "plans", "watches", "tracks"][j] })),
+  { from: t, to: teams[(i + 1) % teams.length], label: "depends on" },
+  ...(i % 2 ? [{ from: `${t}-p`, to: t, label: "suggested for", dashed: true }] : []),
+]);
+
+export const Canvas: StoryObj = {
+  name: "Larger graph on the canvas",
+  render: function Render() {
+    const [selected, setSelected] = useState<string | null>(null);
+    return (
+      <Card>
+        <GraphChart label="Organisation knowledge" nodes={big} links={bigLinks} kinds={kinds} selectedId={selected} onNodeClick={(id) => setSelected((s) => (s === id ? null : id))} height={520} />
+      </Card>
+    );
+  },
 };

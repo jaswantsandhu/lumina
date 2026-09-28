@@ -1,4 +1,68 @@
 .lm-graph { min-width: 0; position: relative; }
+.lm-graph__canvas {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--lm-radius-md);
+  background: var(--lm-color-surface-sunken);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.lm-graph__canvas--panning { cursor: grabbing; }
+.lm-graph__canvas:focus-visible { outline: 2px solid var(--lm-color-focus); outline-offset: 2px; }
+.lm-graph__canvas svg { display: block; }
+.lm-graph__dot { fill: var(--lm-color-border-strong); }
+
+.lm-graph__link line { stroke: var(--lm-color-border-strong); transition: opacity 120ms; }
+.lm-graph__link--active line { stroke: var(--lm-color-text-muted); }
+.lm-graph__link--dim { opacity: 0.25; }
+.lm-graph__link-label { fill: var(--lm-color-text-muted); paint-order: stroke; stroke: var(--lm-color-surface-sunken); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+
+.lm-graph__node { cursor: pointer; transition: opacity 120ms; }
+.lm-graph__node--dim { opacity: 0.3; }
+.lm-graph__hit { fill: transparent; }
+.lm-graph__dot-node { stroke: var(--lm-color-surface); }
+.lm-graph__node--pending .lm-graph__dot-node { fill-opacity: 0.5; stroke: var(--lm-color-text-muted); stroke-dasharray: 3 2; }
+.lm-graph__node--selected .lm-graph__dot-node { stroke: var(--lm-color-text); stroke-dasharray: none; }
+.lm-graph__node:hover .lm-graph__dot-node { stroke: var(--lm-color-text-muted); }
+.lm-graph__label { fill: var(--lm-color-text); font-weight: 500; paint-order: stroke; stroke: var(--lm-color-surface-sunken); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.lm-graph__node--selected .lm-graph__label { font-weight: 600; }
+
+/* Floating control bar, bottom left. */
+.lm-graph__controls {
+  position: absolute;
+  left: var(--lm-space-3);
+  bottom: var(--lm-space-3);
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--lm-color-surface);
+  border: 1px solid var(--lm-color-border);
+  border-radius: var(--lm-radius-md);
+  box-shadow: var(--lm-shadow-md);
+  cursor: default;
+}
+.lm-graph__controls button {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 var(--lm-space-1);
+  border: 0;
+  border-radius: var(--lm-radius-sm);
+  background: transparent;
+  color: var(--lm-color-text);
+  cursor: pointer;
+  font: inherit;
+}
+.lm-graph__controls button:hover:not(:disabled) { background: var(--lm-color-surface-sunken); }
+.lm-graph__controls button:focus-visible { outline: 2px solid var(--lm-color-focus); outline-offset: 1px; }
+.lm-graph__controls button:disabled { color: var(--lm-color-text-subtle); cursor: default; }
+.lm-graph__controls svg { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lm-graph__zoom { font-size: var(--lm-font-size-xs); font-variant-numeric: tabular-nums; min-width: 2.75rem; color: var(--lm-color-text-muted); }
+.lm-graph__empty { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--lm-color-text-muted); pointer-events: none; }
+
 .lm-graph__legend { display: flex; flex-wrap: wrap; gap: var(--lm-space-3); margin: var(--lm-space-2) 0 0; padding: 0; list-style: none; font-size: var(--lm-font-size-sm); color: var(--lm-color-text-muted); }
 .lm-graph__legend li { display: inline-flex; align-items: center; gap: var(--lm-space-1); }
 .lm-graph__swatch { width: 0.75rem; height: 0.75rem; border-radius: 50%; }
@@ -9,4 +73,3 @@
 .lm-graph__nodes button { font: inherit; font-size: var(--lm-font-size-sm); padding: var(--lm-space-1) var(--lm-space-2); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-sm); background: var(--lm-color-surface); color: var(--lm-color-text); cursor: pointer; }
 .lm-graph__nodes button[aria-current="true"] { border-color: var(--lm-color-accent); color: var(--lm-color-accent); }
 .lm-graph__nodes button:focus-visible { outline: 2px solid var(--lm-color-focus); outline-offset: 2px; }
-.lm-graph .highcharts-point { transition: opacity 120ms; }

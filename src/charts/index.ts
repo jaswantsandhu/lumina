@@ -3,4 +3,4 @@
 // Requires the peer dependencies highcharts and highcharts-react-official.
 export { Chart, type ChartProps, type ChartType, type ChartSeries } from "./Chart";
 export { buildChartOptions, readChartTheme, type ChartTheme } from "./theme";
-export { GraphChart, type GraphChartProps, type GraphNode, type GraphLink, type GraphKind } from "./GraphChart";
+export { GraphChart, layoutGraph, type GraphChartProps, type GraphNode, type GraphLink, type GraphKind } from "./GraphChart";

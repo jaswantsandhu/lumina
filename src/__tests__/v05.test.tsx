@@ -1,37 +1,81 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { GraphChart } from "../charts";
+import { GraphChart, layoutGraph } from "../charts";
 
 const nodes = [
   { id: "a", label: "Alpha", kind: "entity" },
   { id: "b", label: "Beta", kind: "doc", pending: true },
+  { id: "c", label: "Gamma", kind: "entity" },
 ];
-const links = [{ from: "b", to: "a", label: "mentions" }];
+const links = [
+  { from: "b", to: "a", label: "mentions" },
+  { from: "a", to: "c", label: "uses" },
+];
 const kinds = { entity: { label: "Topic" }, doc: { label: "Document", color: 1 } };
 
 describe("GraphChart", () => {
-  it("names the graph and summarises it", () => {
+  it("is a focusable canvas named with its size and controls", () => {
     render(<GraphChart label="Knowledge" nodes={nodes} links={links} kinds={kinds} />);
-    expect(screen.getByRole("img", { name: /Knowledge: 2 nodes, 1 links/ })).toBeInTheDocument();
+    const canvas = screen.getByRole("application", { name: /Knowledge: 3 nodes, 2 links/ });
+    expect(canvas).toHaveAttribute("tabindex", "0");
+    expect(screen.getByRole("toolbar", { name: "Canvas controls" })).toBeInTheDocument();
   });
+
+  it("zooms with the controls and the keyboard, and fits", () => {
+    render(<GraphChart label="K" nodes={nodes} links={links} kinds={kinds} />);
+    const pct = () => screen.getByRole("button", { name: "Zoom to 100%" }).textContent;
+    fireEvent.click(screen.getByRole("button", { name: "Zoom to 100%" }));
+    expect(pct()).toBe("100%");
+    fireEvent.click(screen.getByRole("button", { name: "Zoom in" }));
+    expect(pct()).toBe("125%");
+    fireEvent.click(screen.getByRole("button", { name: "Zoom out" }));
+    expect(pct()).toBe("100%");
+    fireEvent.keyDown(screen.getByRole("application"), { key: "+" });
+    expect(pct()).toBe("125%");
+    fireEvent.keyDown(screen.getByRole("application"), { key: "-" });
+    expect(pct()).toBe("100%");
+    fireEvent.click(screen.getByRole("button", { name: "Fit to view" }));
+    expect(pct()).toMatch(/^\d+%$/);
+  });
+
+  it("stops zooming at the limits", () => {
+    render(<GraphChart label="K" nodes={nodes} links={links} />);
+    const zoomIn = screen.getByRole("button", { name: "Zoom in" });
+    for (let i = 0; i < 30; i++) fireEvent.click(zoomIn);
+    expect(zoomIn).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Zoom to 100%" })).toHaveTextContent("400%");
+  });
+
   it("lists nodes as buttons that call onNodeClick", () => {
     const onClick = vi.fn();
     render(<GraphChart label="Knowledge" nodes={nodes} links={links} kinds={kinds} onNodeClick={onClick} selectedId="a" />);
-    const beta = screen.getByRole("button", { name: "Beta (Document, pending)" });
-    fireEvent.click(beta);
+    fireEvent.click(screen.getByRole("button", { name: "Beta (Document, pending)" }));
     expect(onClick).toHaveBeenCalledWith("b");
     expect(screen.getByRole("button", { name: /Alpha/ })).toHaveAttribute("aria-current", "true");
   });
+
   it("has a links table with labels resolved", () => {
     render(<GraphChart label="Knowledge" nodes={nodes} links={links} kinds={kinds} />);
-    const table = screen.getByRole("table", { name: "Knowledge: links" });
-    expect(table).toHaveTextContent("BetamentionsAlpha");
+    expect(screen.getByRole("table", { name: "Knowledge: links" })).toHaveTextContent("BetamentionsAlpha");
   });
-  it("shows a legend only when several kinds are present", () => {
+
+  it("shows a legend only when several kinds are present, and survives data changes", () => {
     const { rerender } = render(<GraphChart label="K" nodes={nodes} links={links} kinds={kinds} />);
     expect(screen.getByRole("list", { name: "Node types" })).toHaveTextContent("TopicDocument");
     rerender(<GraphChart label="K" nodes={nodes} links={links} kinds={kinds} selectedId="b" />);
     rerender(<GraphChart label="K" nodes={[nodes[0]]} links={[]} kinds={kinds} />);
     expect(screen.queryByRole("list", { name: "Node types" })).toBeNull();
+  });
+});
+
+describe("layoutGraph", () => {
+  it("is deterministic and keeps placed nodes where they are", () => {
+    const one = layoutGraph(nodes, links);
+    const two = layoutGraph(nodes, links);
+    expect([...one]).toEqual([...two]);
+    const placed = new Map([["a", { x: 5, y: 7 }]]);
+    const three = layoutGraph(nodes, links, placed);
+    expect(three.get("a")).toEqual({ x: 5, y: 7 });
+    for (const p of three.values()) expect(Number.isFinite(p.x) && Number.isFinite(p.y)).toBe(true);
   });
 });

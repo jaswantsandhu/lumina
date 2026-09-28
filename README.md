@@ -63,7 +63,7 @@ tokens.color.palette.pink["700"]; // "#be185d" (the accent)
 | Forms | `Field` (label, hint, error, required), `Input`, `PasswordInput` (show/hide), `NumberInput` (unit, clamping), `Combobox` (pick or type, filtered, keyboard), `Textarea`, `Select`, `Checkbox`, `Switch` |
 | Files | `FileUpload` (drag and drop, type/size limits, progress, errors), `FileDownload` (text, Blob, generated data or URL) |
 | Data display | `StatCard` (value, hint, trend), `Progress` (meter with warning/danger thresholds), `Timeline` (steps with status and expandable detail, live), `DataTable` (sorting, pagination, selection, loading and empty states; rows become cards on phones), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting, line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
-| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut on Highcharts, themed with tokens. `GraphChart`: force-directed node-link graph with node kinds, pending nodes, selection and click |
+| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut on Highcharts, themed with tokens. `GraphChart`: node-link graph on a pan/zoom canvas with node kinds, pending nodes, selection and click |
 | Feedback and overlays | `Alert`, `ToastProvider` + `useToast`, `Tooltip`, `Dialog`, `DropdownMenu` |
 | Navigation | `Tabs` + `TabPanel`, `AppShell`, `SidebarBrand`, `SidebarFooter`, `NavSection`, `NavItem` |
 | Chat | `ChatThread` (header, messages that stay scrolled to the bottom, composer), `ChatMessage` (yours as bubbles, others as cards), `ChatComposer` (Enter sends, Shift+Enter new line, grows) |
@@ -87,7 +87,7 @@ import { Chart } from "@jaswantsandhu/lumina/charts";
 
 Colours, fonts, grid and tooltips come from the tokens (`--lm-color-chart-1…6` for series). Charts re-theme when light/dark changes. Pass `options` to merge in any Highcharts option. ### GraphChart
 
-A force-directed node-link graph (Highcharts networkgraph) for knowledge graphs, dependencies or org charts:
+A node-link graph on a pannable, zoomable canvas, for knowledge graphs, dependencies or org charts. It draws its own SVG (no Highcharts needed for this one):
 
 ```tsx
 import { GraphChart } from "@jaswantsandhu/lumina/charts";
@@ -102,10 +102,11 @@ import { GraphChart } from "@jaswantsandhu/lumina/charts";
 />
 ```
 
+- **Canvas**: drag the dotted background to pan; drag a node to move it. Zoom with the control bar (zoom in, zoom out, fit, and the zoom level, which resets to 100%), ctrl/⌘ + wheel or trackpad pinch, a two-finger pinch on touch, or the keyboard when the canvas has focus (+, −, 0 fits, arrow keys pan). A plain wheel still scrolls the page.
+- **Readable at any size**: labels appear once you zoom in (always on graphs of 25 nodes or fewer); hovering or selecting a node shows its and its neighbours' labels and link labels, and dims the rest.
 - `kinds` sets colour (palette index), size and the legend; `pending: true` fades a node (e.g. awaiting review), `dashed: true` dashes a link.
-- Nodes can be dragged; a click calls `onNodeClick`. Show the node's details next to the graph (see the *Knowledge graph with overview* story).
-- Accessible: the graph is named with its node and link counts; Tab reveals a list of node buttons (same `onNodeClick`), and a hidden table lists every link for screen readers.
-- Any change to nodes, links or kinds redraws the layout (networkgraph can't update in place); selection changes don't.
+- The layout is deterministic, and nodes already placed keep their position when data changes. `layoutGraph(nodes, links)` is exported if you need positions yourself.
+- Accessible: the canvas is a focusable, labelled region with keyboard pan and zoom; Tab reveals a list of node buttons (same `onNodeClick`), and a hidden table lists every link for screen readers.
 
 Highcharts needs a [commercial licence](https://shop.highcharts.com/) for non-personal use.
 
