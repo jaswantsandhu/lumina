@@ -1,4 +1,6 @@
 import { forwardRef, useEffect, useId, useMemo, useRef, useState, type InputHTMLAttributes, type KeyboardEvent, type ReactNode } from "react";
+import { createPortal } from "react-dom";
+import { portalTarget, usePopover } from "./popover";
 import { cx } from "../utils";
 import { useField } from "./Field";
 
@@ -134,8 +136,11 @@ export function Combobox({ value, onValueChange, options, allowCustom = true, pl
   const [query, setQuery] = useState<string | null>(null);
   const [active, setActive] = useState(0);
   const wrap = useRef<HTMLDivElement>(null);
+  const list = useRef<HTMLUListElement>(null);
+  const style = usePopover(open, wrap, list, { matchWidth: true });
   const opts = useMemo(() => options.map((o) => (typeof o === "string" ? { value: o } : o)), [options]);
-  const text = query ?? value;
+  // Show the picked option's label, not its raw value (values can be ids).
+  const text = query ?? opts.find((o) => o.value === value)?.label ?? value;
   const filtered = useMemo(() => {
     const q = (query ?? "").toLowerCase();
     return q ? opts.filter((o) => o.value.toLowerCase().includes(q) || o.label?.toLowerCase().includes(q)) : opts;
@@ -143,7 +148,7 @@ export function Combobox({ value, onValueChange, options, allowCustom = true, pl
   useEffect(() => setActive(0), [query, open]);
   useEffect(() => {
     if (!open) return;
-    const close = (e: MouseEvent) => !wrap.current?.contains(e.target as Node) && commit();
+    const close = (e: MouseEvent) => !wrap.current?.contains(e.target as Node) && !list.current?.contains(e.target as Node) && commit();
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
   });
@@ -205,14 +210,15 @@ export function Combobox({ value, onValueChange, options, allowCustom = true, pl
         onFocus={() => setOpen(true)}
         onKeyDown={onKey}
         onBlur={(e) => {
-          if (!wrap.current?.contains(e.relatedTarget as Node)) commit();
+          if (!wrap.current?.contains(e.relatedTarget as Node) && !list.current?.contains(e.relatedTarget as Node)) commit();
         }}
       />
       <button type="button" tabIndex={-1} className="lm-combobox__toggle" aria-label="Show options" disabled={disabled} onClick={() => setOpen(!open)}>
         <span aria-hidden="true" />
       </button>
-      {open && (
-        <ul id={listId} role="listbox" className="lm-combobox__list">
+      {open &&
+        createPortal(
+        <ul ref={list} id={listId} role="listbox" className="lm-combobox__list" style={style}>
           {loading ? (
             <li className="lm-combobox__empty">Loading…</li>
           ) : filtered.length ? (
@@ -234,8 +240,9 @@ export function Combobox({ value, onValueChange, options, allowCustom = true, pl
           ) : (
             <li className="lm-combobox__empty">{allowCustom && query ? `Use "${query}"` : emptyText}</li>
           )}
-        </ul>
-      )}
+        </ul>,
+          portalTarget(wrap.current) ?? document.body,
+        )}
     </div>
   );
 }

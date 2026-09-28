@@ -1,6 +1,8 @@
-.lm-app { display: flex; height: 100vh; overflow: hidden; background: var(--lm-color-bg); }
-.lm-app__sidebar { width: var(--lm-size-sidebar); flex-shrink: 0; display: flex; flex-direction: column; gap: var(--lm-space-4); padding: var(--lm-space-4) var(--lm-space-3); background: var(--lm-color-surface); border-right: 1px solid var(--lm-color-border); overflow-y: auto; }
-.lm-app__main { flex: 1; min-width: 0; overflow: auto; }
+/* One scroll area: the main pane. position: relative keeps absolutely positioned
+   descendants (visually hidden captions, labels) from stretching the page. */
+.lm-app { display: flex; height: 100vh; height: 100dvh; overflow: hidden; background: var(--lm-color-bg); }
+.lm-app__sidebar { width: var(--lm-size-sidebar); flex-shrink: 0; display: flex; flex-direction: column; gap: var(--lm-space-4); padding: var(--lm-space-4) var(--lm-space-3); background: var(--lm-color-surface); border-right: 1px solid var(--lm-color-border); overflow-y: auto; position: relative; }
+.lm-app__main { flex: 1; min-width: 0; overflow: auto; position: relative; }
 .lm-app__topbar, .lm-app__backdrop { display: none; }
 .lm-app__menu { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; margin-left: calc(-1 * var(--lm-space-2)); border: none; border-radius: var(--lm-radius-md); background: none; color: var(--lm-color-text); cursor: pointer; }
 .lm-app__menu:hover { background: var(--lm-color-surface-sunken); }

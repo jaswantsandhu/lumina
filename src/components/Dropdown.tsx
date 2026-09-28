@@ -1,4 +1,6 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { createPortal } from "react-dom";
+import { portalTarget, usePopover } from "./popover";
 import { cx } from "../utils";
 
 export type DropdownItem =
@@ -23,6 +25,8 @@ export function DropdownMenu({ trigger, items, align = "start", className }: Dro
   const root = useRef<HTMLDivElement>(null);
   const triggerEl = useRef<HTMLButtonElement | null>(null);
   const itemEls = useRef<(HTMLButtonElement | null)[]>([]);
+  const menuEl = useRef<HTMLDivElement>(null);
+  const style = usePopover(open, triggerEl, menuEl, { align });
   const actionable = items.map((it, i) => ((it.type ?? "item") === "item" && !(it as { disabled?: boolean }).disabled ? i : -1)).filter((i) => i >= 0);
 
   const close = (focusTrigger = true) => {
@@ -38,7 +42,8 @@ export function DropdownMenu({ trigger, items, align = "start", className }: Dro
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {
-      if (!root.current?.contains(e.target as Node)) close(false);
+      const t = e.target as Node;
+      if (!root.current?.contains(t) && !menuEl.current?.contains(t)) close(false);
     };
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
@@ -83,8 +88,9 @@ export function DropdownMenu({ trigger, items, align = "start", className }: Dro
         "aria-expanded": open,
         "aria-controls": id,
       })}
-      {open && (
-        <div id={id} role="menu" className={cx("lm-dropdown__menu", `lm-dropdown__menu--${align}`)} onKeyDown={onMenuKey}>
+      {open &&
+        createPortal(
+        <div ref={menuEl} id={id} role="menu" className={cx("lm-dropdown__menu", `lm-dropdown__menu--${align}`)} style={style} onKeyDown={onMenuKey}>
           {items.map((it, i) => {
             if (it.type === "separator") return <div key={i} role="separator" className="lm-dropdown__separator" />;
             if (it.type === "label")
@@ -116,8 +122,9 @@ export function DropdownMenu({ trigger, items, align = "start", className }: Dro
               </button>
             );
           })}
-        </div>
-      )}
+        </div>,
+          portalTarget(triggerEl.current) ?? document.body,
+        )}
     </div>
   );
 }
