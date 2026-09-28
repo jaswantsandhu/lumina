@@ -42,6 +42,9 @@ export { Alert, type AlertProps } from "./components/Alert";
 export { ToastProvider, useToast, type ToastOptions } from "./components/Toast";
 export { Tooltip, type TooltipProps } from "./components/Tooltip";
 export { Dialog, type DialogProps } from "./components/Dialog";
+export { Drawer, type DrawerProps } from "./components/Drawer";
+export { ConfirmDialog, type ConfirmDialogProps } from "./components/ConfirmDialog";
+export { DescriptionList, type DescriptionListProps, type DescriptionItem } from "./components/DescriptionList";
 export { DropdownMenu, type DropdownMenuProps, type DropdownItem } from "./components/Dropdown";
 
 // Navigation

@@ -136,7 +136,24 @@ export function DataTable<T>({ columns, rows, getRowId, caption, pageSize = 10, 
             : visible.map((row) => {
                 const id = getRowId(row);
                 return (
-                  <TR key={id} selected={selected.has(id)} className={cx(onRowClick && "lm-datatable__row--clickable")} onClick={onRowClick ? () => onRowClick(row) : undefined}>
+                  <TR
+                    key={id}
+                    selected={selected.has(id)}
+                    className={cx(onRowClick && "lm-datatable__row--clickable")}
+                    onClick={onRowClick ? () => onRowClick(row) : undefined}
+                    // Clickable rows are reachable and usable from the keyboard too.
+                    tabIndex={onRowClick ? 0 : undefined}
+                    onKeyDown={
+                      onRowClick
+                        ? (e) => {
+                            if ((e.key === "Enter" || e.key === " ") && e.target === e.currentTarget) {
+                              e.preventDefault();
+                              onRowClick(row);
+                            }
+                          }
+                        : undefined
+                    }
+                  >
                     {selectable && (
                       <TD onClick={(e) => e.stopPropagation()}>
                         <input type="checkbox" className="lm-check__box" aria-label={`Select row ${id}`} checked={selected.has(id)} onChange={() => toggleRow(id)} />

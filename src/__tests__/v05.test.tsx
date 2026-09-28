@@ -79,3 +79,50 @@ describe("layoutGraph", () => {
     for (const p of three.values()) expect(Number.isFinite(p.x) && Number.isFinite(p.y)).toBe(true);
   });
 });
+
+import { ConfirmDialog, DataTable, DescriptionList, Drawer } from "../index";
+
+describe("Drawer", () => {
+  it("is a labelled dialog with its content and footer", () => {
+    render(
+      <Drawer open onClose={() => {}} title="Request" description="From the lead" footer={<button>Delete</button>}>
+        <p>Details</p>
+      </Drawer>,
+    );
+    const d = screen.getByRole("dialog", { hidden: true });
+    expect(d).toHaveAccessibleName("Request");
+    expect(d).toHaveTextContent("Details");
+    expect(screen.getByRole("button", { name: "Close", hidden: true })).toBeInTheDocument();
+  });
+});
+
+describe("DescriptionList", () => {
+  it("renders terms and values, with a dash for empty ones", () => {
+    const { container } = render(<DescriptionList items={[{ term: "Agent", description: "lead" }, { term: "Response", description: "" }]} />);
+    expect(container.querySelectorAll("dt")).toHaveLength(2);
+    expect(container.querySelectorAll("dd")[1]).toHaveTextContent("—");
+  });
+});
+
+describe("ConfirmDialog", () => {
+  it("confirms and cancels", () => {
+    const yes = vi.fn();
+    const no = vi.fn();
+    render(<ConfirmDialog open title="Delete it?" onConfirm={yes} onCancel={no}>Gone for good.</ConfirmDialog>);
+    fireEvent.click(screen.getByRole("button", { name: "Delete", hidden: true }));
+    fireEvent.click(screen.getByRole("button", { name: "Cancel", hidden: true }));
+    expect(yes).toHaveBeenCalledOnce();
+    expect(no).toHaveBeenCalledOnce();
+  });
+});
+
+describe("DataTable clickable rows", () => {
+  it("open from the keyboard", () => {
+    const onRowClick = vi.fn();
+    render(<DataTable caption="T" columns={[{ key: "n", header: "N" }]} rows={[{ n: "a" }]} getRowId={(r) => r.n} onRowClick={onRowClick} />);
+    const row = screen.getAllByRole("row")[1];
+    expect(row).toHaveAttribute("tabindex", "0");
+    fireEvent.keyDown(row, { key: "Enter" });
+    expect(onRowClick).toHaveBeenCalledWith({ n: "a" });
+  });
+});

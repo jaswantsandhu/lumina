@@ -4,6 +4,8 @@
 .lm-datatable__arrow { opacity: 0.3; }
 .lm-datatable__arrow--active { opacity: 1; color: var(--lm-color-accent); }
 .lm-datatable__row--clickable { cursor: pointer; }
+.lm-datatable__row--clickable:hover { background: var(--lm-color-surface-sunken); }
+.lm-datatable__row--clickable:focus-visible { outline: 2px solid var(--lm-color-focus); outline-offset: -2px; }
 .lm-datatable__pager { display: flex; align-items: center; justify-content: flex-end; gap: var(--lm-space-2); font-size: var(--lm-font-size-sm); color: var(--lm-color-text-muted); }
 .lm-datatable__count { margin-right: auto; }
 .lm-datatable__page { font-variant-numeric: tabular-nums; }
