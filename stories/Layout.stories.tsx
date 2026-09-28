@@ -91,3 +91,31 @@ export const ListAndDetail: StoryObj = {
     );
   },
 };
+
+export const LongListWithAction: StoryObj = {
+  name: "List and detail: long list with an action",
+  render: () => (
+    <div style={{ height: 420, border: "1px solid var(--lm-color-border)" }}>
+      <SplitView
+        listLabel="Conversations"
+        list={
+          <>
+            <Button variant="primary" fullWidth>
+              New conversation
+            </Button>
+            {Array.from({ length: 30 }, (_, i) => (
+              <Card key={i}>
+                <Text weight="medium">Conversation {i + 1}</Text>
+                <Text size="sm" tone="muted">
+                  Ada · {i + 1}m ago
+                </Text>
+              </Card>
+            ))}
+          </>
+        }
+      >
+        <PageHeader title="Conversation 1" description="The list scrolls; its items keep their height." />
+      </SplitView>
+    </div>
+  ),
+};

@@ -1,5 +1,7 @@
 .lm-split { display: flex; height: 100%; min-height: 0; }
 .lm-split__list { width: 18rem; flex-shrink: 0; display: flex; flex-direction: column; gap: var(--lm-space-3); padding: var(--lm-space-4) var(--lm-space-3); border-right: 1px solid var(--lm-color-border); overflow-y: auto; }
+/* Items keep their height; the list scrolls instead of squashing them. */
+.lm-split__list > * { flex-shrink: 0; }
 .lm-split__detail { flex: 1; min-width: 0; overflow-y: auto; padding: var(--lm-space-6) var(--lm-space-8); }
 .lm-split__detail--flush { padding: 0; display: flex; flex-direction: column; }
 .lm-split__back { display: none; }
