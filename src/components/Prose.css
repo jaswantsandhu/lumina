@@ -1,0 +1,7 @@
+.lm-prose { display: grid; gap: var(--lm-space-4); min-width: 0; line-height: var(--lm-font-line-height-relaxed); }
+.lm-prose > * { margin: 0; }
+.lm-prose > :is(h1, h2, h3, h4) { margin-top: var(--lm-space-4); }
+.lm-prose > :is(h1, h2, h3, h4):first-child { margin-top: 0; }
+.lm-prose :is(ul, ol) { margin: 0; padding-inline-start: var(--lm-space-6); display: grid; gap: var(--lm-space-2); }
+.lm-prose__table { overflow-x: auto; max-width: 100%; }
+.lm-prose img { max-width: 100%; height: auto; border-radius: var(--lm-radius-md); }

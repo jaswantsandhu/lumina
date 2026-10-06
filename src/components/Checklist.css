@@ -1,0 +1,11 @@
+.lm-checklist { display: grid; gap: var(--lm-space-4); }
+.lm-checklist__items { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--lm-space-3); }
+.lm-checklist__item {
+  display: grid; gap: var(--lm-space-3); padding: var(--lm-space-4);
+  border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-lg); background: var(--lm-color-surface-raised);
+  transition: opacity var(--lm-motion-duration-normal) var(--lm-motion-easing-standard);
+}
+.lm-checklist__item--done { opacity: 0.75; }
+.lm-checklist__item--done .lm-checklist__title { text-decoration: line-through; text-decoration-color: var(--lm-color-text-muted); }
+.lm-checklist__title { font-weight: var(--lm-font-weight-semibold); }
+.lm-checklist__content { display: grid; gap: var(--lm-space-3); min-width: 0; }

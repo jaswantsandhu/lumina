@@ -29,6 +29,8 @@ export { Avatar, type AvatarProps } from "./components/Avatar";
 export { List, ListItem, type ListItemProps } from "./components/List";
 export { CodeBlock, type CodeBlockProps } from "./components/CodeBlock";
 export { CodeView, type CodeViewProps } from "./components/CodeView";
+export { codeLanguages, resolveLanguage } from "./components/prism/languages";
+export { Prose, markdownComponents, type ProseProps, type MarkdownComponentsOptions } from "./components/Prose";
 export { DataTable, type Column, type DataTableProps } from "./components/DataTable";
 export { StatCard, type StatCardProps } from "./components/StatCard";
 export { Progress, type ProgressProps } from "./components/Progress";
@@ -58,3 +60,10 @@ export { useTheme, ThemeToggle, useAppearance, applyAppearance, ThemeCustomizer,
 export { Sparkline, type SparklineProps } from "./components/Sparkline";
 export { Gauge, type GaugeProps } from "./components/Gauge";
 export { CalendarHeatmap, type CalendarHeatmapProps } from "./components/CalendarHeatmap";
+
+// Learning & explaining: step-through diagrams, quizzes, checklists
+export { StepDiagram, type StepDiagramProps, type DiagramNode, type DiagramEdge, type DiagramGroup, type DiagramStep, type DiagramValue } from "./components/StepDiagram";
+export { SequenceDiagram, type SequenceDiagramProps, type SequenceParticipant, type SequenceMessage, type SequenceStep } from "./components/SequenceDiagram";
+export { type DiagramCode } from "./components/diagramShared";
+export { Quiz, type QuizProps, type QuizQuestion } from "./components/Quiz";
+export { Checklist, type ChecklistProps, type ChecklistItem } from "./components/Checklist";

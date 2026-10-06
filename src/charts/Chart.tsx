@@ -4,9 +4,12 @@ import more from "highcharts/highcharts-more";
 import heatmap from "highcharts/modules/heatmap";
 import treemap from "highcharts/modules/treemap";
 import sankey from "highcharts/modules/sankey";
+import funnel from "highcharts/modules/funnel";
+import bullet from "highcharts/modules/bullet";
+import xrange from "highcharts/modules/xrange";
 
 // Highcharts 11 modules are factories; 12+ register themselves on import.
-for (const mod of [more, heatmap, treemap, sankey]) if (typeof mod === "function") (mod as unknown as (h: typeof Highcharts) => void)(Highcharts);
+for (const mod of [more, heatmap, treemap, sankey, funnel, bullet, xrange]) if (typeof mod === "function") (mod as unknown as (h: typeof Highcharts) => void)(Highcharts);
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cx } from "../utils";
 import { buildChartOptions, readChartTheme, type BuildOptions, type ChartSeries, type ChartType } from "./theme";

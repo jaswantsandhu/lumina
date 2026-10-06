@@ -3,8 +3,13 @@ import { cx } from "../utils";
 
 export interface DialogProps {
   open: boolean;
-  /** Called on Escape, backdrop click or the close button. */
-  onClose: () => void;
+  /** Called on Escape, backdrop click or the close button (only when dismissible). */
+  onClose?: () => void;
+  /**
+   * false: a required choice. No close button, and Escape / backdrop clicks do nothing, so the user must use
+   * one of the footer buttons (e.g. a consent decision). Always offer every choice there, equally easy.
+   */
+  dismissible?: boolean;
   title: ReactNode;
   description?: ReactNode;
   children?: ReactNode;
@@ -17,7 +22,7 @@ export interface DialogProps {
 /**
  * Modal dialog built on the native <dialog> (focus trap, Escape, top layer).
  */
-export function Dialog({ open, onClose, title, description, children, footer, size = "md", className }: DialogProps) {
+export function Dialog({ open, onClose, title, description, children, footer, size = "md", dismissible = true, className }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const descId = useId();
@@ -37,11 +42,11 @@ export function Dialog({ open, onClose, title, description, children, footer, si
       aria-describedby={description ? descId : undefined}
       onCancel={(e) => {
         e.preventDefault();
-        onClose();
+        if (dismissible) onClose?.();
       }}
       onClick={(e) => {
         // Clicks on the backdrop land on the <dialog> element itself.
-        if (e.target === ref.current) onClose();
+        if (dismissible && e.target === ref.current) onClose?.();
       }}
     >
       <div className="lm-dialog__panel">
@@ -56,9 +61,11 @@ export function Dialog({ open, onClose, title, description, children, footer, si
               </p>
             )}
           </div>
-          <button type="button" className="lm-dialog__close" onClick={onClose} aria-label="Close">
-            ×
-          </button>
+          {dismissible && (
+            <button type="button" className="lm-dialog__close" onClick={onClose} aria-label="Close">
+              ×
+            </button>
+          )}
         </div>
         {children && <div className="lm-dialog__body">{children}</div>}
         {footer && <div className="lm-dialog__footer">{footer}</div>}

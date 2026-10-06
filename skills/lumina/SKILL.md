@@ -37,10 +37,14 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 | Details & overlays | Row click on `DataTable` (`onRowClick`, keyboard-accessible) opens a `Drawer` with a `DescriptionList` of the item; destructive actions go through `ConfirmDialog`. Don't build ad-hoc side panels or confirm dialogs |
 | Small charts | `Sparkline data label` in StatCards/table cells; `Gauge value max label` for usage against a limit; `CalendarHeatmap data label` for activity by day |
 | Themes | Accent/density/radius via `useAppearance()` or `<ThemeCustomizer />` (data-accent, data-density, data-radius on <html>). Never hard-code brand colours: use accent tokens so every accent works |
-| Charts | `Chart type series categories title` from `@jaswantsandhu/lumina/charts` (line, spline, area + `stacked`, column, bar, pie, donut). Never hard-code chart colours: the tokens theme them. `GraphChart label nodes links kinds selectedId onNodeClick height` for node-link graphs on a pan/zoom canvas (knowledge graphs); keep `nodes`/`links` memoised, and show the clicked node's details beside it |
+| Charts | `Chart type series categories title` from `@jaswantsandhu/lumina/charts` (line, spline, area + `stacked`, column, bar, pie, donut, waterfall, funnel, `bullet` for a value against its `target`, `xrange` swim lanes with `yCategories`; `limits` for reference lines). Never hard-code chart colours: the tokens theme them. `GraphChart label nodes links kinds selectedId onNodeClick height` for node-link graphs on a pan/zoom canvas (knowledge graphs); keep `nodes`/`links` memoised, and show the clicked node's details beside it |
 | Upload files | `FileUpload files onFilesChange accept maxSize maxFiles multiple` (controlled; set `status`/`progress` on each file while uploading) |
 | Download a file | `FileDownload filename data` (text, Blob, or a function) or `href` |
-| Source code | `CodeView code language title lineNumbers highlightLines`. Plain output/logs: `CodeBlock` |
+| Source code | `CodeView code language title lineNumbers highlightLines`. Languages include bash, java, csharp, powershell, docker, python, go, rust, sql, yaml, toml, diff; aliases `sh`, `yml`, `ps1`, `dockerfile` work. Unknown names warn once and show plain text (`codeLanguages()` lists them). Plain output/logs: `CodeBlock` |
+| Markdown / long text | `<Prose>` around the content; render Markdown with `components={markdownComponents({ onInternalLink })}` (react-markdown or similar). Don't hand-map headings, tables and code blocks |
+| Explain a process step by step | `StepDiagram title nodes edges steps` (omit x/y for automatic layout; `direction="TB"`; `groups`; per-step `active`, `show`, `values`, `lines` with `code`). Time-ordered interactions (threads, requests, agents and tools): `SequenceDiagram participants messages steps` |
+| Self-check | `Quiz questions=[{question, options, answer, explanation}] onComplete` |
+| Tickable steps | `Checklist items=[{id, title, content}] checked onToggle label` (progress bar included) |
 | Menu of actions | `DropdownMenu trigger={(p) => <Button {...p}>…</Button>} items=[{label, onSelect, danger}, {type:"separator"}]` |
 | Selectable list (threads, items) | `List` + `ListItem title meta selected leading trailing` |
 | Nothing to show | `EmptyState title description action` (one primary Button) |
@@ -48,6 +52,7 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 | Message in the page | `Alert tone title action onDismiss` |
 | Transient confirmation | `useToast().toast({ title, description, tone })` |
 | Confirm or destructive step | `Dialog open onClose title description footer` |
+| Required choice (consent, terms) | `Dialog dismissible={false} open title footer` (no close button, Escape and backdrop ignored); offer every option in the footer, equally easy |
 | Hint on hover or focus | `Tooltip content` around a focusable element (never essential info) |
 | Switch views | `Tabs items value onValueChange` + `TabPanel` |
 | Person or agent | `Avatar name` (initials, colour derived from the name) |

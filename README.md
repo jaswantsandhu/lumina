@@ -62,17 +62,18 @@ tokens.color.palette.pink["700"]; // "#be185d" (the accent)
 | Actions | `Button` (primary, secondary, ghost, danger; sm, md, lg; loading), `IconButton`, `Spinner` |
 | Forms | `Field` (label, hint, error, required), `Input`, `PasswordInput` (show/hide), `NumberInput` (unit, clamping), `Combobox` (pick or type, filtered, keyboard), `Textarea`, `Select`, `Checkbox`, `Switch` |
 | Files | `FileUpload` (drag and drop, type/size limits, progress, errors), `FileDownload` (text, Blob, generated data or URL) |
-| Data display | `StatCard` (value, hint, trend), `Progress` (meter with warning/danger thresholds), `Timeline` (steps with status and expandable detail, live), `DataTable` (sorting, pagination, selection, loading and empty states; rows become cards on phones), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting, line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
-| Overlays | `Dialog`, `Drawer` (side panel for an item's details or a long form; full width on phones), `ConfirmDialog` (ask before destructive actions), `DropdownMenu`, `Tooltip`. Menus and combobox lists render in a portal, so scroll areas never clip them |
+| Data display | `StatCard` (value, hint, trend), `Progress` (meter with warning/danger thresholds), `Timeline` (steps with status and expandable detail, live), `DataTable` (sorting, pagination, selection, loading and empty states; rows become cards on phones), `Table` primitives (`THead`, `TBody`, `TR`, `TH`, `TD`), `Badge`, `Card` (+ `CardHeader`, `CardBody`, `CardFooter`), `Avatar`, `List`, `ListItem`, `CodeView` (syntax highlighting for ~50 languages including bash, Java, C#, PowerShell and Dockerfile; aliases like `sh`, `yml`, `ps1`; line numbers, highlighted lines), `CodeBlock`, `EmptyState`, `Skeleton` |
+| Overlays | `Dialog` (`dismissible={false}` for a required choice, e.g. consent), `Drawer` (side panel for an item's details or a long form; full width on phones), `ConfirmDialog` (ask before destructive actions), `DropdownMenu`, `Tooltip`. Menus and combobox lists render in a portal, so scroll areas never clip them |
 | Details | `DescriptionList` (labelled values: rows, or a grid of columns; empty values show "—") |
 | Small charts | `Sparkline` (line/area/bar, for stat cards and table cells), `Gauge` (ring or half, thresholds → warning/danger), `CalendarHeatmap` (activity by day). Plain SVG, no Highcharts |
-| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut, scatter, bubble, heatmap, treemap, sankey, and combos (per-series `type`, second axis with `yAxis: 1`) on Highcharts, themed with tokens. `palette`: categorical, colorblind, sequential (follows the accent), diverging. `GraphChart`: node-link graph on a pan/zoom canvas with node kinds, pending nodes, selection and click |
+| Learning and docs | `StepDiagram` (boxes and arrows you step through: automatic layout, groups, values that change per step, linked code), `SequenceDiagram` (participants and messages over time, with changing state), `Quiz` (instant feedback and a score), `Checklist` (tickable steps with progress), `Prose` + `markdownComponents()` (Markdown rendered with Lumina components) |
+| Charts | `Chart` from `@jaswantsandhu/lumina/charts`: line, spline, area (stacked), column, bar, pie, donut, scatter, bubble, heatmap, treemap, sankey, waterfall, funnel, bullet (value against a target: limit bars), xrange (swim lanes), `limits` (reference lines), and combos (per-series `type`, second axis with `yAxis: 1`) on Highcharts, themed with tokens. `palette`: categorical, colorblind, sequential (follows the accent), diverging. `GraphChart`: node-link graph on a pan/zoom canvas with node kinds, pending nodes, selection and click |
 | Feedback and overlays | `Alert`, `ToastProvider` + `useToast`, `Tooltip`, `Dialog`, `DropdownMenu` |
 | Navigation | `Tabs` + `TabPanel`, `AppShell`, `SidebarBrand`, `SidebarFooter`, `NavSection`, `NavItem` |
 | Chat | `ChatThread` (header, messages that stay scrolled to the bottom, composer), `ChatMessage` (yours as bubbles, others as cards), `ChatComposer` (Enter sends, Shift+Enter new line, grows) |
 | Theme | `useTheme`, `ThemeToggle` |
 
-Browse them all, with props and live controls, in Storybook.
+Browse them all, with props and live controls, in **[Storybook](https://jaswantsandhu.github.io/lumina/)**.
 
 ## Charts
 
@@ -112,6 +113,50 @@ import { GraphChart } from "@jaswantsandhu/lumina/charts";
 - Accessible: the canvas is a focusable, labelled region with keyboard pan and zoom; Tab reveals a list of node buttons (same `onNodeClick`), and a hidden table lists every link for screen readers.
 
 Highcharts needs a [commercial licence](https://shop.highcharts.com/) for non-personal use.
+
+### More chart types
+
+```tsx
+// A value against its limit: bars over the target turn danger, above 90% warning.
+<Chart type="bullet" categories={["ACME", "BOLT"]} series={[{ name: "Used", data: [{ y: 104, target: 100 }, { y: 63, target: 100 }] }]} />
+// Reference lines on any cartesian chart.
+<Chart type="line" series={...} limits={[{ value: 9.5, label: "Monthly limit", tone: "danger" }]} />
+// From an amount to what's left: totals use isSum.
+<Chart type="waterfall" series={[{ name: "Payout", data: [{ name: "Amount", y: 100 }, { name: "Fee", y: -3.2 }, { name: "Payout", isSum: true }] }]} />
+// Swim lanes: bars from x to x2, y is the lane.
+<Chart type="xrange" yCategories={["Thread A", "Thread B"]} series={[{ name: "Work", data: [{ x: 0, x2: 200, y: 0, name: "fraud check" }] }]} />
+<Chart type="funnel" series={[{ name: "Learners", data: [["Joined", 30], ["Finished", 18]] }]} />
+```
+
+## Diagrams, quizzes and Markdown
+
+For courses, docs and onboarding. All plain SVG and CSS (no Highcharts), themed with tokens, and accessible (captions are announced as steps change; Back / Next / Play controls).
+
+```tsx
+import { StepDiagram, SequenceDiagram, Quiz, Checklist, Prose, markdownComponents } from "@jaswantsandhu/lumina";
+
+// Leave out x/y for automatic layout. values change a node or edge from that step on; lines highlight linked code.
+<StepDiagram
+  title="Total card volume"
+  nodes={[{ id: "src", label: "payments" }, { id: "sum", label: "reduce", sub: "total = 0" }]}
+  edges={[{ id: "e", from: "src", to: "sum" }]}
+  code={{ code: source, language: "java" }}
+  steps={[
+    { caption: "Start a stream.", active: ["src"], lines: [1] },
+    { caption: "Add them up.", active: ["sum", "e"], values: { sum: { sub: "total = 640.75" } }, lines: [4] },
+  ]}
+/>
+
+// Messages over time; leave out steps for one step per message.
+<SequenceDiagram participants={[{ id: "a", label: "Thread A" }, { id: "m", label: "Memory" }]}
+                 messages={[{ id: "w", from: "a", to: "m", label: "write 101" }]} />
+
+<Quiz questions={[{ question: "7 / 2 in Java?", options: ["3.5", "3"], answer: 1, explanation: "Integer division." }]} />
+<Checklist label="Lab progress" items={[{ id: "install", title: "Install JDK 25" }]} checked={done} onToggle={toggle} />
+
+// Markdown with any renderer that takes a components map (react-markdown shown).
+<Prose><ReactMarkdown components={markdownComponents({ onInternalLink: navigate })}>{text}</ReactMarkdown></Prose>
+```
 
 ## Themes
 
@@ -166,6 +211,8 @@ docker run --rm -v "$PWD":/app -w /app node:22-alpine sh -c "npm ci && npm run t
 ## Releasing
 
 Bump `version` in `package.json`, commit, and push a tag `v<version>`. The **Release** workflow tests, builds and publishes to GitHub Packages.
+
+Every push to `main` also rebuilds Storybook and publishes it to GitHub Pages (**Storybook** workflow): https://jaswantsandhu.github.io/lumina/
 
 ## For AI agents
 

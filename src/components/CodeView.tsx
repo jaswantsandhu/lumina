@@ -1,10 +1,14 @@
 import { Highlight, type Language, type PrismTheme } from "prism-react-renderer";
 import { useState } from "react";
 import { cx } from "../utils";
+import { resolveLanguage } from "./prism/languages";
 
 export interface CodeViewProps {
   code: string;
-  /** Prism language: tsx, typescript, javascript, json, bash, python, css, markup, yaml, sql, go, rust, … */
+  /**
+   * Language: tsx, typescript, javascript, json, bash, python, java, csharp, go, rust, sql, yaml, css, markup,
+   * powershell, docker, toml, diff, … Common aliases work too (sh, yml, html, ps1, dockerfile). See codeLanguages().
+   */
   language?: Language | string;
   /** File name or title in the header. */
   title?: string;
@@ -44,7 +48,7 @@ export function CodeView({ code, language = "tsx", title, lineNumbers = true, hi
           </button>
         )}
       </div>
-      <Highlight code={code.replace(/\n$/, "")} language={language as Language} theme={theme}>
+      <Highlight code={code.replace(/\n$/, "")} language={resolveLanguage(language) as Language} theme={theme}>
         {({ tokens, getLineProps, getTokenProps }) => (
           <pre className={cx("lm-codeview__pre", wrap && "lm-codeview__pre--wrap")} style={{ maxHeight }} tabIndex={0} aria-label={title ? `${title} source` : "Source code"}>
             <code>

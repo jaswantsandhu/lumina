@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Alert, Button, Dialog, Field, Input, Stack, Tooltip, useToast, IconButton } from "../src/index";
+import { Alert, Button, Dialog, Field, Input, Stack, Text, Tooltip, useToast, IconButton } from "../src/index";
 
 export default { title: "Feedback/Components", tags: ["autodocs"] } satisfies Meta;
 
@@ -69,4 +69,35 @@ export const Tooltips: StoryObj = {
       </Tooltip>
     </Stack>
   ),
+};
+
+export const RequiredChoiceDialog: StoryObj = {
+  name: "Dialog: required choice",
+  parameters: { docs: { description: { story: "`dismissible={false}` removes the close button and ignores Escape and backdrop clicks, so the user must pick a footer button. Use it for decisions like cookie consent, and keep every option equally easy." } } },
+  render: function Render() {
+    const [open, setOpen] = useState(false);
+    const [choice, setChoice] = useState<string | null>(null);
+    const decide = (c: string) => {
+      setChoice(c);
+      setOpen(false);
+    };
+    return (
+      <Stack gap="3" align="flex-start">
+        <Button onClick={() => setOpen(true)}>Show consent dialog</Button>
+        {choice && <Text tone="muted">You chose: {choice}</Text>}
+        <Dialog
+          open={open}
+          dismissible={false}
+          title="Can we use analytics?"
+          description="Google Analytics helps us see which pages are used. It stays off unless you accept, and the site works the same either way."
+          footer={
+            <>
+              <Button onClick={() => decide("Decline")}>Decline</Button>
+              <Button onClick={() => decide("Accept")}>Accept analytics</Button>
+            </>
+          }
+        />
+      </Stack>
+    );
+  },
 };

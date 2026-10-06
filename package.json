@@ -1,11 +1,13 @@
 {
   "name": "@jaswantsandhu/lumina",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "Lumina: design tokens and accessible React components.",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "./src/components/prism/setGlobal.ts",
+    "./src/components/prism/restoreGlobal.ts"
   ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -43,39 +45,43 @@
     "typecheck": "npm run tokens && tsc --noEmit",
     "test": "npm run tokens && vitest run",
     "storybook": "npm run tokens && storybook dev -p 6006 --host 0.0.0.0 --no-open",
-    "build-storybook": "npm run tokens && storybook build -o storybook-static"
+    "build-storybook": "npm run tokens && storybook build -o storybook-static",
+    "smoke": "node scripts/smoke.mjs"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
     "highcharts": ">=11",
-    "highcharts-react-official": ">=3"
+    "highcharts-react-official": ">=3",
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^8.4.7",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/manager-api": "^8.4.7",
+    "@storybook/react": "^8.4.7",
+    "@storybook/react-vite": "^8.4.7",
+    "@storybook/test": "^8.4.7",
+    "@storybook/theming": "^8.4.7",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
+    "highcharts": "^11.4.8",
+    "highcharts-react-official": "^3.2.1",
     "jsdom": "^25.0.1",
+    "prismjs": "^1.30.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "storybook": "^8.4.7",
     "tsup": "^8.3.5",
     "typescript": "^5.6.0",
     "vite": "^5.4.10",
-    "vitest": "^2.1.5",
-    "storybook": "^8.4.7",
-    "@storybook/react": "^8.4.7",
-    "@storybook/react-vite": "^8.4.7",
-    "@storybook/addon-essentials": "^8.4.7",
-    "@storybook/addon-a11y": "^8.4.7",
-    "@storybook/blocks": "^8.4.7",
-    "@storybook/test": "^8.4.7",
-    "highcharts": "^11.4.8",
-    "highcharts-react-official": "^3.2.1",
-    "@storybook/manager-api": "^8.4.7",
-    "@storybook/theming": "^8.4.7"
+    "vitest": "^2.1.5"
   },
   "dependencies": {
     "prism-react-renderer": "^2.4.1"

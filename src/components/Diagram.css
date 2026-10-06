@@ -1,0 +1,47 @@
+/* StepDiagram and SequenceDiagram */
+.lm-diagram {
+  display: grid; gap: var(--lm-space-3); margin: 0; min-width: 0;
+  padding: var(--lm-space-4); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-lg);
+  background: var(--lm-color-surface-raised);
+}
+.lm-diagram__title { font-weight: var(--lm-font-weight-semibold); color: var(--lm-color-text); }
+.lm-diagram__svg { width: 100%; height: auto; display: block; margin-inline: auto; }
+.lm-diagram__caption { margin: 0; color: var(--lm-color-text); min-height: calc(2 * var(--lm-font-line-height-normal) * 1em); }
+.lm-diagram__controls { display: flex; flex-wrap: wrap; gap: var(--lm-space-2); }
+
+.lm-diagram__node rect {
+  fill: var(--lm-color-surface-sunken); stroke: var(--lm-color-border-strong); stroke-width: 1.5;
+  transition: fill var(--lm-motion-duration-normal) var(--lm-motion-easing-standard), stroke var(--lm-motion-duration-normal) var(--lm-motion-easing-standard);
+}
+.lm-diagram__node--active rect { fill: var(--lm-color-accent-soft); stroke: var(--lm-color-accent); stroke-width: 2.5; }
+.lm-diagram__label { fill: var(--lm-color-text); font-size: var(--lm-font-size-sm); font-weight: var(--lm-font-weight-semibold); font-family: var(--lm-font-family-sans); }
+.lm-diagram__sub { fill: var(--lm-color-text-muted); font-size: var(--lm-font-size-xs); font-family: var(--lm-font-family-mono); }
+
+.lm-diagram__edge path { stroke: var(--lm-color-border-strong); stroke-width: 1.5; transition: stroke var(--lm-motion-duration-normal) var(--lm-motion-easing-standard); }
+.lm-diagram__edge--active path { stroke: var(--lm-color-accent); stroke-width: 2.5; }
+.lm-diagram__edge--dashed path { stroke-dasharray: 6 5; }
+.lm-diagram__arrowhead { fill: var(--lm-color-border-strong); }
+.lm-diagram__arrowhead--active { fill: var(--lm-color-accent); }
+/* A halo in the card colour keeps labels readable where they cross lines. */
+.lm-diagram__edge-label {
+  fill: var(--lm-color-text-muted); font-size: var(--lm-font-size-xs); font-family: var(--lm-font-family-sans);
+  paint-order: stroke; stroke: var(--lm-color-surface-raised); stroke-width: 4px; stroke-linejoin: round;
+}
+.lm-diagram__edge--active .lm-diagram__edge-label { fill: var(--lm-color-text); }
+.lm-diagram__pulse { fill: var(--lm-color-accent); }
+
+.lm-diagram__group rect { fill: none; stroke: var(--lm-color-border-strong); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.lm-diagram__group--active rect { stroke: var(--lm-color-accent); }
+.lm-diagram__group-label { fill: var(--lm-color-text-muted); font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-semibold); font-family: var(--lm-font-family-sans); }
+
+.lm-sequence__lifeline { stroke: var(--lm-color-border-strong); stroke-width: 1; stroke-dasharray: 4 4; }
+.lm-sequence__state { fill: var(--lm-color-accent); font-size: var(--lm-font-size-xs); font-weight: var(--lm-font-weight-semibold); font-family: var(--lm-font-family-mono); }
+
+/* A value that changed at this step flashes once. */
+.lm-diagram__changed { animation: lm-diagram-flash var(--lm-motion-duration-slow) var(--lm-motion-easing-emphasized) 2; }
+@keyframes lm-diagram-flash { 50% { opacity: 0.25; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lm-diagram__pulse { display: none; }
+  .lm-diagram__changed { animation: none; }
+}

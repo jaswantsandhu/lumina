@@ -139,3 +139,81 @@ export const Palettes: StoryObj = {
     </Stack>
   ),
 };
+
+export const LimitLine: StoryObj = {
+  name: "Limit line",
+  parameters: { docs: { description: { story: "`limits` draws reference lines on the value axis (tone danger, warning, success or neutral)." } } },
+  render: () =>
+    wrap(
+      <Chart
+        type="line"
+        title="ACME month-to-date volume"
+        categories={["Wk 1", "Wk 2", "Wk 3", "Wk 4"]}
+        valueSuffix="M USD"
+        series={[{ name: "Volume", data: [2.1, 4.8, 7.6, 9.92] }]}
+        limits={[{ value: 9.5, label: "Monthly limit 9.5M", tone: "danger" }, { value: 8.55, label: "90%", tone: "warning" }]}
+        legend={false}
+      />,
+    ),
+};
+
+export const LimitBar: StoryObj = {
+  name: "Limit bar (bullet)",
+  parameters: { docs: { description: { story: "`type=\"bullet\"`: each bar has a `target` marker. Bars over their target turn danger, above 90% warning." } } },
+  render: () =>
+    wrap(
+      <Chart
+        type="bullet"
+        title="Volume against monthly limit (%)"
+        categories={["ACME", "BOLT", "CRUX"]}
+        valueSuffix="%"
+        series={[{ name: "Used", data: [{ y: 104.4, target: 100 }, { y: 63, target: 100 }, { y: 96, target: 100 }] }]}
+        legend={false}
+        height={220}
+      />,
+    ),
+};
+
+export const Waterfall: StoryObj = {
+  render: () =>
+    wrap(
+      <Chart
+        type="waterfall"
+        title="From payment to payout"
+        valueSuffix=" USD"
+        series={[{ name: "Payout", data: [{ name: "Amount", y: 100 }, { name: "Card fee", y: -3.2 }, { name: "Reserve (5%)", y: -5 }, { name: "Payout", isSum: true }] }]}
+        legend={false}
+      />,
+    ),
+};
+
+export const Funnel: StoryObj = {
+  render: () =>
+    wrap(<Chart type="funnel" title="Batch progress" series={[{ name: "Learners", data: [["Joined", 30], ["Started Day 1", 28], ["Finished Day 5", 22], ["Finished Day 10", 18]] }]} legend={false} />),
+};
+
+export const SwimLanes: StoryObj = {
+  name: "Swim lanes (xrange)",
+  parameters: { docs: { description: { story: "`type=\"xrange\"`: bars from `x` to `x2` in lanes (`y` is the lane index, `yCategories` names them). Add `datetime` for timestamps." } } },
+  render: () =>
+    wrap(
+      <Chart
+        type="xrange"
+        title="Thread timelines (ms)"
+        yCategories={["Thread A", "Thread B", "Thread C"]}
+        series={[
+          {
+            name: "Work",
+            data: [
+              { x: 0, x2: 200, y: 0, name: "fraud check" },
+              { x: 0, x2: 200, y: 1, name: "fraud check" },
+              { x: 200, x2: 260, y: 0, name: "save" },
+              { x: 50, x2: 250, y: 2, name: "fraud check" },
+            ],
+          },
+        ]}
+        legend={false}
+        height={240}
+      />,
+    ),
+};
