@@ -48,6 +48,13 @@ export function Dialog({ open, onClose, title, description, children, footer, si
         // Clicks on the backdrop land on the <dialog> element itself.
         if (dismissible && e.target === ref.current) onClose?.();
       }}
+      onClose={() => {
+        // The browser can close a modal on its own: Chrome lets Escape through, even when "cancel" is prevented,
+        // if the user hasn't interacted with the page yet. Keep the DOM in step with the open prop.
+        if (!open) return;
+        if (dismissible) onClose?.();
+        else ref.current?.showModal();
+      }}
     >
       <div className="lm-dialog__panel">
         <div className="lm-dialog__header">

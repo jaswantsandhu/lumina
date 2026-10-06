@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cx } from "../utils";
 import { Alert } from "./Alert";
 import { Badge } from "./Badge";
@@ -29,12 +29,21 @@ export function Quiz({ questions, onComplete, retry = true, className }: QuizPro
   const scoreOf = (p: Record<number, number>) => questions.filter((q, i) => p[i] === q.answer).length;
   const score = scoreOf(picked);
 
+  // Functional update: several answers given before React re-renders must all count.
   const choose = (qi: number, oi: number) => {
-    if (picked[qi] !== undefined) return;
-    const next = { ...picked, [qi]: oi };
-    setPicked(next);
-    if (Object.keys(next).length === questions.length) onComplete?.(scoreOf(next), questions.length);
+    setPicked((prev) => (prev[qi] !== undefined ? prev : { ...prev, [qi]: oi }));
   };
+
+  // Report completion once, after the last answer lands (not inside the state updater).
+  const reported = useRef(false);
+  useEffect(() => {
+    if (answered === questions.length && questions.length > 0) {
+      if (!reported.current) onComplete?.(score, questions.length);
+      reported.current = true;
+    } else {
+      reported.current = false;
+    }
+  }, [answered, score, questions.length, onComplete]);
 
   return (
     <div className={cx("lm-quiz", className)}>

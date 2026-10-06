@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { Checklist, CodeView, codeLanguages, Dialog, markdownComponents, Prose, Quiz, resolveLanguage, SequenceDiagram, StepDiagram } from "../index";
 import { buildChartOptions, readChartTheme } from "../charts";
@@ -39,6 +39,20 @@ describe("Dialog dismissible={false}", () => {
   });
 });
 
+describe("Dialog kept open when the browser closes it", () => {
+  it("re-opens a required dialog, and reports a dismissible one as closed", () => {
+    const onClose = vi.fn();
+    const { rerender } = render(<Dialog open title="Required" dismissible={false} onClose={onClose} />);
+    const dialog = document.querySelector("dialog")!;
+    dialog.close(); // what Chrome does on Escape without user activation
+    expect(dialog).toHaveAttribute("open");
+    expect(onClose).not.toHaveBeenCalled();
+    rerender(<Dialog open title="Optional" onClose={onClose} />);
+    document.querySelector("dialog")!.close();
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+});
+
 describe("markdownComponents", () => {
   it("maps headings, callouts, code blocks and in-app links to Lumina", () => {
     const md = markdownComponents({ onInternalLink: vi.fn() });
@@ -75,6 +89,17 @@ describe("Quiz", () => {
     fireEvent.click(screen.getByRole("button", { name: "BigDecimal" }));
     expect(onComplete).toHaveBeenCalledWith(1, 2);
     expect(screen.getByText("Score 1/2")).toBeInTheDocument();
+  });
+  it("keeps every answer when several are given before a re-render", () => {
+    const onComplete = vi.fn();
+    render(<Quiz onComplete={onComplete} questions={[{ question: "A?", options: ["x", "y"], answer: 0 }, { question: "B?", options: ["p", "q"], answer: 0 }]} />);
+    const [x, , p] = screen.getAllByRole("button");
+    act(() => {
+      x.click();
+      p.click();
+    });
+    expect(onComplete).toHaveBeenCalledWith(2, 2);
+    expect(onComplete).toHaveBeenCalledTimes(1);
   });
 });
 
