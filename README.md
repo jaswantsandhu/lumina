@@ -170,3 +170,7 @@ Bump `version` in `package.json`, commit, and push a tag `v<version>`. The **Rel
 ## For AI agents
 
 [`skills/lumina/SKILL.md`](skills/lumina/SKILL.md) is a skill that teaches coding agents to build UIs with Lumina. It's shipped inside the package (`node_modules/@jaswantsandhu/lumina/skills/`). [`AGENTS.md`](AGENTS.md) covers working *on* Lumina itself.
+
+## License
+
+[MIT](LICENSE) © 2026 Jaswant Sandhu

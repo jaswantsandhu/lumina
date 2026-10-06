@@ -2,7 +2,7 @@
   "name": "@jaswantsandhu/lumina",
   "version": "0.8.2",
   "description": "Lumina: design tokens and accessible React components.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "module",
   "sideEffects": [
     "*.css"
