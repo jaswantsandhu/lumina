@@ -52,6 +52,13 @@ import { ToastProvider } from "@jaswantsandhu/lumina";
 | Message in the page | `Alert tone title action onDismiss` |
 | Transient confirmation | `useToast().toast({ title, description, tone })` |
 | Confirm or destructive step | `Dialog open onClose title description footer` |
+| Sign-in / invite / reset page | `AuthLayout title description brand footer` around the form (don't hand-build centred cards) |
+| Show a secret or link to copy | `CopyField label value note once` (one-time links and API tokens: `once` + a note that it won't be shown again) |
+| Progress through steps or days | `Journey label stops=[{id, label, state: done/active/todo/locked, title}] onSelect` |
+| Dense status table (dashboards) | `StatusCell tone title` inside `TD` |
+| Edit code or JSON | `CodeEditor value onChange language errors=[{line, message}] onSave`; map validation paths with `findJsonPathLine(text, "steps.3.title")`, syntax errors with `jsonSyntaxError(text)` |
+| Date + time in a time zone | `ZonedDateTimeInput value onChange timeZone` (UTC ISO in and out); display with `formatInTimeZone(iso, timeZone)`. Never format schedule times in the viewer's local zone by accident |
+| Opt-in analytics / cookies | `const consent = useConsent({ key, enabled, onGrant, onRevoke })`; `<ConsentDialog open={consent.needsDecision} onDecide={consent.decide} description=…/>`; `<CookieSettings consent={consent} />` at the top of the privacy page; `clearCookies(["_ga"])` in onRevoke |
 | Required choice (consent, terms) | `Dialog dismissible={false} open title footer` (no close button, Escape and backdrop ignored); offer every option in the footer, equally easy |
 | Hint on hover or focus | `Tooltip content` around a focusable element (never essential info) |
 | Switch views | `Tabs items value onValueChange` + `TabPanel` |

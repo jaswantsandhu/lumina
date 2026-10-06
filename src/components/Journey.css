@@ -1,0 +1,17 @@
+.lm-journey { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--lm-journey-cols, 10), minmax(0, 1fr)); gap: var(--lm-space-2); }
+@media (max-width: 900px) { .lm-journey { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.lm-journey__button {
+  width: 100%; display: flex; flex-direction: column; align-items: center; gap: var(--lm-space-2); padding: var(--lm-space-3) var(--lm-space-1);
+  border-radius: var(--lm-radius-lg); border: 1px solid var(--lm-color-border); background: var(--lm-color-surface); color: var(--lm-color-text); font: inherit;
+}
+button.lm-journey__button { cursor: pointer; transition: border-color var(--lm-motion-duration-fast) var(--lm-motion-easing-standard); }
+button.lm-journey__button:hover { border-color: var(--lm-color-accent); }
+button.lm-journey__button:focus-visible { outline: 2px solid var(--lm-color-focus); outline-offset: 2px; }
+.lm-journey__marker {
+  width: 2.25rem; height: 2.25rem; border-radius: var(--lm-radius-full); display: grid; place-items: center; font-weight: var(--lm-font-weight-bold);
+  background: var(--lm-color-surface-sunken); border: 2px solid var(--lm-color-border-strong);
+}
+.lm-journey__stop--active .lm-journey__marker { border-color: var(--lm-color-accent); color: var(--lm-color-accent); }
+.lm-journey__stop--done .lm-journey__marker { background: var(--lm-color-success-solid); border-color: var(--lm-color-success-solid); color: var(--lm-color-on-solid); }
+.lm-journey__stop--locked { opacity: 0.6; }
+.lm-journey__label { font-size: var(--lm-font-size-xs); text-align: center; color: var(--lm-color-text-muted); }

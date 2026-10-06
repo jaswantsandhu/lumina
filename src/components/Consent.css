@@ -1,0 +1,7 @@
+.lm-cookie-settings {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--lm-space-3);
+  padding: var(--lm-space-4); border: 1px solid var(--lm-color-border); border-radius: var(--lm-radius-lg); background: var(--lm-color-surface-raised);
+}
+.lm-cookie-settings__title { margin: 0; font-weight: var(--lm-font-weight-semibold); color: var(--lm-color-text); }
+.lm-cookie-settings__state { margin: 0; font-size: var(--lm-font-size-sm); color: var(--lm-color-text-muted); }
+.lm-cookie-settings__actions { display: flex; flex-wrap: wrap; gap: var(--lm-space-2); }

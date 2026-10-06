@@ -1,0 +1,9 @@
+.lm-status-cell {
+  display: inline-block; white-space: nowrap; font-size: var(--lm-font-size-xs); font-variant-numeric: tabular-nums;
+  padding: 0 var(--lm-space-2); border-radius: var(--lm-radius-sm); line-height: var(--lm-font-line-height-normal);
+}
+.lm-status-cell--success { background: var(--lm-color-success-soft); color: var(--lm-color-success-text); }
+.lm-status-cell--warning { background: var(--lm-color-warning-soft); color: var(--lm-color-warning-text); }
+.lm-status-cell--danger { background: var(--lm-color-danger-soft); color: var(--lm-color-danger-text); }
+.lm-status-cell--info { background: var(--lm-color-info-soft); color: var(--lm-color-info-text); }
+.lm-status-cell--neutral { color: var(--lm-color-text-muted); }

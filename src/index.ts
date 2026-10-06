@@ -31,6 +31,10 @@ export { CodeBlock, type CodeBlockProps } from "./components/CodeBlock";
 export { CodeView, type CodeViewProps } from "./components/CodeView";
 export { codeLanguages, resolveLanguage } from "./components/prism/languages";
 export { Prose, markdownComponents, type ProseProps, type MarkdownComponentsOptions } from "./components/Prose";
+export { CodeEditor, type CodeEditorProps, type CodeEditorError } from "./components/CodeEditor";
+export { jsonSyntaxError, jsonPathLines, findJsonPathLine } from "./json";
+export { CopyField, type CopyFieldProps } from "./components/CopyField";
+export { StatusCell, type StatusCellProps } from "./components/StatusCell";
 export { DataTable, type Column, type DataTableProps } from "./components/DataTable";
 export { StatCard, type StatCardProps } from "./components/StatCard";
 export { Progress, type ProgressProps } from "./components/Progress";
@@ -49,9 +53,18 @@ export { ConfirmDialog, type ConfirmDialogProps } from "./components/ConfirmDial
 export { DescriptionList, type DescriptionListProps, type DescriptionItem } from "./components/DescriptionList";
 export { DropdownMenu, type DropdownMenuProps, type DropdownItem } from "./components/Dropdown";
 
-// Navigation
+// Navigation & pages
+export { AuthLayout, type AuthLayoutProps } from "./components/AuthLayout";
+export { Journey, type JourneyProps, type JourneyStop } from "./components/Journey";
 export { Tabs, TabPanel, type TabItem, type TabsProps } from "./components/Tabs";
 export { AppShell, SidebarBrand, SidebarFooter, NavSection, NavItem, type AppShellProps, type NavItemProps } from "./components/AppShell";
+
+// Time zones
+export { zonedToISO, isoToZoned, formatInTimeZone, localTimeZone } from "./time";
+export { ZonedDateTimeInput, type ZonedDateTimeInputProps } from "./components/ZonedDateTimeInput";
+
+// Consent (opt-in analytics and similar)
+export { useConsent, clearCookies, ConsentDialog, CookieSettings, type UseConsentOptions, type Consent, type ConsentDialogProps, type CookieSettingsProps } from "./components/Consent";
 
 // Theme
 export { useTheme, ThemeToggle, useAppearance, applyAppearance, ThemeCustomizer, ACCENTS, type ThemePreference, type Accent, type Density, type Radius, type Appearance } from "./components/Theme";

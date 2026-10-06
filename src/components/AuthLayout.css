@@ -1,0 +1,11 @@
+.lm-auth { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: var(--lm-space-4); background: var(--lm-color-bg); }
+.lm-auth__inner { width: min(26rem, 100%); display: grid; gap: var(--lm-space-4); }
+.lm-auth__brand { text-align: center; font-weight: var(--lm-font-weight-semibold); font-size: var(--lm-font-size-lg); color: var(--lm-color-text); }
+.lm-auth__card {
+  display: grid; gap: var(--lm-space-3); padding: var(--lm-space-6); border-radius: var(--lm-radius-lg);
+  border: 1px solid var(--lm-color-border); background: var(--lm-color-surface-raised); box-shadow: var(--lm-shadow-md);
+}
+.lm-auth__title { margin: 0; font-size: var(--lm-font-size-xl); font-weight: var(--lm-font-weight-semibold); color: var(--lm-color-text); }
+.lm-auth__description { margin: 0; color: var(--lm-color-text-muted); }
+.lm-auth__body { display: grid; gap: var(--lm-space-4); }
+.lm-auth__footer { text-align: center; font-size: var(--lm-font-size-sm); color: var(--lm-color-text-muted); }

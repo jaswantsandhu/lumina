@@ -1,0 +1,26 @@
+.lm-code-editor { border: 1px solid var(--lm-color-border-strong); border-radius: var(--lm-radius-md); background: var(--lm-color-surface); min-width: 0; overflow: hidden; }
+.lm-code-editor:focus-within { border-color: var(--lm-color-accent); box-shadow: 0 0 0 1px var(--lm-color-accent); }
+.lm-code-editor--invalid { border-color: var(--lm-color-danger); }
+.lm-code-editor__scroll { display: flex; overflow: auto; font-family: var(--lm-font-family-mono); font-size: var(--lm-font-size-sm); line-height: var(--lm-font-line-height-relaxed); }
+.lm-code-editor__gutter {
+  position: sticky; left: 0; z-index: 1; flex-shrink: 0; display: flex; flex-direction: column; padding: var(--lm-space-3) 0;
+  background: var(--lm-color-surface-sunken); border-right: 1px solid var(--lm-color-border); user-select: none;
+}
+.lm-code-editor__number { min-width: 3rem; padding: 0 var(--lm-space-2); text-align: right; color: var(--lm-color-text-subtle); }
+.lm-code-editor__number--error { color: var(--lm-color-danger-text); background: var(--lm-color-danger-soft); font-weight: var(--lm-font-weight-bold); }
+/* The textarea sits exactly over the highlighted copy: same font, padding and line height; its own text is invisible. */
+.lm-code-editor__area { position: relative; flex: 1; min-width: max-content; }
+.lm-code-editor__highlight, .lm-code-editor__input {
+  margin: 0; padding: var(--lm-space-3) var(--lm-space-4) var(--lm-space-3) var(--lm-space-3); border: 0;
+  font: inherit; line-height: inherit; letter-spacing: 0; tab-size: 2; white-space: pre; overflow-wrap: normal;
+}
+.lm-code-editor__highlight { color: var(--lm-color-text); min-height: 100%; }
+.lm-code-editor__line { display: inline; }
+.lm-code-editor__line--error { background: var(--lm-color-danger-soft); text-decoration: underline wavy var(--lm-color-danger); text-underline-offset: 3px; }
+.lm-code-editor__input {
+  position: absolute; inset: 0; width: 100%; height: 100%; resize: none; overflow: hidden; outline: none;
+  background: transparent; color: transparent; caret-color: var(--lm-color-text);
+}
+.lm-code-editor__input::selection { background: var(--lm-color-accent-soft); color: transparent; }
+.lm-code-editor__errors { margin: 0; padding: var(--lm-space-2) var(--lm-space-3); list-style: none; display: grid; gap: var(--lm-space-1); border-top: 1px solid var(--lm-color-border); background: var(--lm-color-danger-soft); font-size: var(--lm-font-size-sm); color: var(--lm-color-danger-text); }
+.lm-code-editor__errors button { font: inherit; font-weight: var(--lm-font-weight-semibold); color: inherit; background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }

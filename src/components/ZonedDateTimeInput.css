@@ -1,0 +1,3 @@
+.lm-zoned { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--lm-space-2); }
+.lm-zoned .lm-input { width: auto; }
+.lm-zoned__zone { font-size: var(--lm-font-size-xs); color: var(--lm-color-text-muted); }

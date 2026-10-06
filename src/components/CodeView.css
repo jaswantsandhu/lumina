@@ -12,11 +12,11 @@
 .lm-codeview__line--marked { background: var(--lm-color-accent-soft); box-shadow: inset 3px 0 0 var(--lm-color-accent); }
 .lm-codeview__number { flex-shrink: 0; width: 3rem; padding-right: var(--lm-space-3); text-align: right; color: var(--lm-color-text-subtle); user-select: none; }
 .lm-codeview__content { white-space: pre; padding-left: var(--lm-space-3); }
-.lm-codeview .token.comment, .lm-codeview .token.prolog, .lm-codeview .token.doctype, .lm-codeview .token.cdata { color: var(--lm-color-text-subtle); font-style: italic; }
-.lm-codeview .token.keyword, .lm-codeview .token.boolean, .lm-codeview .token.important, .lm-codeview .token.atrule { color: var(--lm-color-code-keyword); }
-.lm-codeview .token.string, .lm-codeview .token.char, .lm-codeview .token.attr-value, .lm-codeview .token.regex, .lm-codeview .token.inserted { color: var(--lm-color-code-string); }
-.lm-codeview .token.number, .lm-codeview .token.constant, .lm-codeview .token.symbol { color: var(--lm-color-code-number); }
-.lm-codeview .token.function, .lm-codeview .token.class-name, .lm-codeview .token.builtin { color: var(--lm-color-code-function); }
-.lm-codeview .token.tag, .lm-codeview .token.selector, .lm-codeview .token.deleted { color: var(--lm-color-code-tag); }
-.lm-codeview .token.attr-name, .lm-codeview .token.property { color: var(--lm-color-code-attr); }
-.lm-codeview .token.punctuation, .lm-codeview .token.operator { color: var(--lm-color-text-muted); }
+:is(.lm-codeview, .lm-code-editor) .token.comment, :is(.lm-codeview, .lm-code-editor) .token.prolog, :is(.lm-codeview, .lm-code-editor) .token.doctype, :is(.lm-codeview, .lm-code-editor) .token.cdata { color: var(--lm-color-text-subtle); font-style: italic; }
+:is(.lm-codeview, .lm-code-editor) .token.keyword, :is(.lm-codeview, .lm-code-editor) .token.boolean, :is(.lm-codeview, .lm-code-editor) .token.important, :is(.lm-codeview, .lm-code-editor) .token.atrule { color: var(--lm-color-code-keyword); }
+:is(.lm-codeview, .lm-code-editor) .token.string, :is(.lm-codeview, .lm-code-editor) .token.char, :is(.lm-codeview, .lm-code-editor) .token.attr-value, :is(.lm-codeview, .lm-code-editor) .token.regex, :is(.lm-codeview, .lm-code-editor) .token.inserted { color: var(--lm-color-code-string); }
+:is(.lm-codeview, .lm-code-editor) .token.number, :is(.lm-codeview, .lm-code-editor) .token.constant, :is(.lm-codeview, .lm-code-editor) .token.symbol { color: var(--lm-color-code-number); }
+:is(.lm-codeview, .lm-code-editor) .token.function, :is(.lm-codeview, .lm-code-editor) .token.class-name, :is(.lm-codeview, .lm-code-editor) .token.builtin { color: var(--lm-color-code-function); }
+:is(.lm-codeview, .lm-code-editor) .token.tag, :is(.lm-codeview, .lm-code-editor) .token.selector, :is(.lm-codeview, .lm-code-editor) .token.deleted { color: var(--lm-color-code-tag); }
+:is(.lm-codeview, .lm-code-editor) .token.attr-name, :is(.lm-codeview, .lm-code-editor) .token.property { color: var(--lm-color-code-attr); }
+:is(.lm-codeview, .lm-code-editor) .token.punctuation, :is(.lm-codeview, .lm-code-editor) .token.operator { color: var(--lm-color-text-muted); }
