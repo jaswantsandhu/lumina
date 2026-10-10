@@ -1,0 +1,6 @@
+.lm-treeview { color: var(--lm-color-text); background: var(--lm-color-surface); border-radius: var(--lm-radius-md); }
+.lm-treeview__item { display: flex; align-items: center; gap: var(--lm-space-2); padding: var(--lm-space-2) var(--lm-space-3); cursor: pointer; font-size: var(--lm-font-size-md); }
+.lm-treeview__item:hover { background: var(--lm-color-surface-sunken); }
+.lm-treeview__item[aria-selected="true"] { background: var(--lm-color-accent-soft); color: var(--lm-color-accent-soft-text); }
+.lm-treeview__item:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); outline-offset: calc(-1 * var(--lm-space-0_5)); }
+.lm-treeview__toggle { display: inline-flex; align-items: center; justify-content: center; width: var(--lm-space-5); min-height: var(--lm-size-control-sm); flex-shrink: 0; font-family: var(--lm-font-family-mono); }

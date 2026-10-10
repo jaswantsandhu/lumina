@@ -1,0 +1,8 @@
+.lm-button-group { display: inline-flex; align-items: stretch; }
+.lm-button-group > .lm-button { border-radius: 0; }
+.lm-button-group--horizontal > .lm-button:first-child { border-start-start-radius: var(--lm-radius-md); border-end-start-radius: var(--lm-radius-md); }
+.lm-button-group--horizontal > .lm-button:last-child { border-start-end-radius: var(--lm-radius-md); border-end-end-radius: var(--lm-radius-md); }
+.lm-button-group--vertical { flex-direction: column; }
+.lm-button-group--vertical > .lm-button:first-child { border-start-start-radius: var(--lm-radius-md); border-start-end-radius: var(--lm-radius-md); }
+.lm-button-group--vertical > .lm-button:last-child { border-end-start-radius: var(--lm-radius-md); border-end-end-radius: var(--lm-radius-md); }
+.lm-button-group > .lm-button:focus-visible { position: relative; z-index: var(--lm-z-base); }

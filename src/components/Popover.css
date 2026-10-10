@@ -1,0 +1,2 @@
+.lm-popover { z-index: var(--lm-z-dropdown); max-width: calc(100vw - var(--lm-space-4)); overflow: auto; padding: var(--lm-space-4); border: var(--lm-space-0_5) solid var(--lm-color-border); border-radius: var(--lm-radius-lg); background: var(--lm-color-surface-raised); color: var(--lm-color-text); box-shadow: var(--lm-shadow-lg); font-family: var(--lm-font-family-sans); font-size: var(--lm-font-size-md); }
+.lm-popover:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); outline-offset: var(--lm-space-0_5); }

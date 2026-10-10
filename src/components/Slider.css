@@ -1,0 +1,3 @@
+.lm-slider { display: block; width: 100%; min-width: 0; height: var(--lm-size-control-md); margin: 0; accent-color: var(--lm-color-accent); cursor: pointer; }
+.lm-slider:disabled { opacity: 0.5; cursor: not-allowed; }
+.lm-slider:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); outline-offset: var(--lm-space-0_5); border-radius: var(--lm-radius-sm); }

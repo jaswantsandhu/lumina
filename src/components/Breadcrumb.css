@@ -1,0 +1,7 @@
+.lm-breadcrumb { color: var(--lm-color-text-muted); font-size: var(--lm-font-size-sm); }
+.lm-breadcrumb__list { display: flex; flex-wrap: wrap; gap: var(--lm-space-2); list-style: none; margin: 0; padding: 0; }
+.lm-breadcrumb__item { display: inline-flex; align-items: center; gap: var(--lm-space-2); }
+.lm-breadcrumb__item a { color: var(--lm-color-accent); text-decoration: none; }
+.lm-breadcrumb__item a:hover { text-decoration: underline; }
+.lm-breadcrumb__item [aria-current] { color: var(--lm-color-text); }
+.lm-breadcrumb__separator { color: var(--lm-color-text-subtle); }

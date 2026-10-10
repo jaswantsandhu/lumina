@@ -1,0 +1,7 @@
+.lm-accordion { border: var(--lm-space-0_5) solid var(--lm-color-border); border-radius: var(--lm-radius-md); overflow: hidden; }
+.lm-accordion__item + .lm-accordion__item { border-top: var(--lm-space-0_5) solid var(--lm-color-border); }
+.lm-accordion__heading { margin: 0; font-size: var(--lm-font-size-md); }
+.lm-accordion__trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--lm-space-3); width: 100%; border: 0; padding: var(--lm-space-3) var(--lm-space-4); background: var(--lm-color-surface); color: var(--lm-color-text); font: inherit; font-weight: var(--lm-font-weight-medium); text-align: start; cursor: pointer; }
+.lm-accordion__trigger:hover:not(:disabled) { background: var(--lm-color-surface-sunken); }
+.lm-accordion__trigger:disabled { color: var(--lm-color-text-subtle); cursor: not-allowed; }
+.lm-accordion__panel { padding: var(--lm-space-4); background: var(--lm-color-surface); }
