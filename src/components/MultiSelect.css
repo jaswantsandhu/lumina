@@ -1,0 +1,16 @@
+.lm-multi-select { width: 100%; }
+.lm-multi-select__control { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lm-space-1); min-height: var(--lm-size-control-md); padding: var(--lm-space-1) var(--lm-space-2); border: var(--lm-space-0_5) solid var(--lm-color-border); border-radius: var(--lm-radius-md); background: var(--lm-color-surface); }
+.lm-multi-select__control:focus-within { outline: var(--lm-space-0_5) solid var(--lm-color-focus); outline-offset: var(--lm-space-0_5); }
+.lm-multi-select__control:has([aria-invalid="true"]) { border-color: var(--lm-color-danger); }
+.lm-multi-select__input { flex: 1; min-width: var(--lm-space-16); width: 100%; border: none; outline: none; padding: var(--lm-space-1); background: transparent; color: var(--lm-color-text); font: inherit; }
+.lm-multi-select__chip { display: inline-flex; align-items: center; gap: var(--lm-space-1); max-width: 100%; overflow-wrap: anywhere; padding: var(--lm-space-0_5) var(--lm-space-1_5); border-radius: var(--lm-radius-sm); background: var(--lm-color-accent-soft); color: var(--lm-color-accent-soft-text); font-size: var(--lm-font-size-sm); }
+.lm-multi-select__remove { flex-shrink: 0; border: none; border-radius: var(--lm-radius-sm); background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.lm-multi-select__remove:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); }
+.lm-multi-select__remove:disabled { cursor: not-allowed; color: var(--lm-color-text-subtle); }
+.lm-multi-select__list { z-index: var(--lm-z-dropdown); box-sizing: border-box; overflow: auto; margin: 0; padding: var(--lm-space-1); list-style: none; border: var(--lm-space-0_5) solid var(--lm-color-border); border-radius: var(--lm-radius-md); background: var(--lm-color-surface-raised); color: var(--lm-color-text); box-shadow: var(--lm-shadow-md); font-family: var(--lm-font-family-sans); font-size: var(--lm-font-size-md); }
+.lm-multi-select__option { padding: var(--lm-space-2); border-radius: var(--lm-radius-sm); cursor: pointer; }
+.lm-multi-select__option--active { background: var(--lm-color-accent-soft); color: var(--lm-color-accent-soft-text); }
+.lm-multi-select__option[aria-selected="true"] { font-weight: var(--lm-font-weight-semibold); }
+.lm-multi-select__option[aria-disabled="true"], .lm-multi-select__empty { color: var(--lm-color-text-subtle); }
+.lm-multi-select__option[aria-disabled="true"] { cursor: not-allowed; }
+.lm-multi-select__empty { padding: var(--lm-space-2); }

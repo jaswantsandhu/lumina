@@ -80,3 +80,21 @@ export { SequenceDiagram, type SequenceDiagramProps, type SequenceParticipant, t
 export { type DiagramCode } from "./components/diagramShared";
 export { Quiz, type QuizProps, type QuizQuestion } from "./components/Quiz";
 export { Checklist, type ChecklistProps, type ChecklistItem } from "./components/Checklist";
+
+// Navigation, selection, and composed controls
+export { Breadcrumb, type BreadcrumbProps, type BreadcrumbItem } from "./components/Breadcrumb";
+export { RadioGroup, type RadioGroupProps, type RadioOption } from "./components/RadioGroup";
+export { SegmentedControl, type SegmentedControlProps, type SegmentedControlItem } from "./components/SegmentedControl";
+export { Accordion, type AccordionProps, type AccordionItem } from "./components/Accordion";
+export { Pagination, type PaginationProps } from "./components/Pagination";
+export { Popover, type PopoverProps, type PopoverTriggerProps } from "./components/PopoverComponent";
+export { CommandPalette, type CommandPaletteProps, type CommandPaletteItem } from "./components/CommandPalette";
+export { MultiSelect, type MultiSelectProps, type MultiSelectOption } from "./components/MultiSelect";
+export { TagInput, type TagInputProps } from "./components/TagInput";
+export { DiffView, diffLines, type DiffViewProps, type DiffLine } from "./components/DiffView";
+export { TreeView, type TreeViewProps, type TreeViewNode } from "./components/TreeView";
+export { JsonTree, type JsonTreeProps, type JsonValue } from "./components/JsonTree";
+export { DatePicker, type DatePickerProps } from "./components/DatePicker";
+export { Slider, type SliderProps } from "./components/Slider";
+export { ButtonGroup, type ButtonGroupProps } from "./components/ButtonGroup";
+export { SplitButton, type SplitButtonProps } from "./components/SplitButton";

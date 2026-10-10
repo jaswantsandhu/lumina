@@ -1,0 +1,8 @@
+.lm-tag-input { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lm-space-1); min-height: var(--lm-size-control-md); padding: var(--lm-space-1) var(--lm-space-2); border: var(--lm-space-0_5) solid var(--lm-color-border); border-radius: var(--lm-radius-md); background: var(--lm-color-surface); }
+.lm-tag-input:focus-within { outline: var(--lm-space-0_5) solid var(--lm-color-focus); outline-offset: var(--lm-space-0_5); }
+.lm-tag-input:has([aria-invalid="true"]) { border-color: var(--lm-color-danger); }
+.lm-tag-input__input { flex: 1; min-width: var(--lm-space-16); width: 100%; border: none; outline: none; padding: var(--lm-space-1); background: transparent; color: var(--lm-color-text); font: inherit; }
+.lm-tag-input__tag { display: inline-flex; align-items: center; gap: var(--lm-space-1); max-width: 100%; overflow-wrap: anywhere; padding: var(--lm-space-0_5) var(--lm-space-1_5); border-radius: var(--lm-radius-sm); background: var(--lm-color-accent-soft); color: var(--lm-color-accent-soft-text); font-size: var(--lm-font-size-sm); }
+.lm-tag-input__remove { flex-shrink: 0; border: none; border-radius: var(--lm-radius-sm); background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.lm-tag-input__remove:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); }
+.lm-tag-input__remove:disabled { cursor: not-allowed; color: var(--lm-color-text-subtle); }

@@ -1,0 +1,10 @@
+.lm-diffview { overflow: auto; min-width: 0; border: var(--lm-space-0_5) solid var(--lm-color-border); border-radius: var(--lm-radius-md); background: var(--lm-color-surface); color: var(--lm-color-text); }
+.lm-diffview:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); }
+.lm-diffview__table { border-collapse: collapse; width: 100%; font-family: var(--lm-font-family-mono); font-size: var(--lm-font-size-sm); line-height: var(--lm-font-line-height-relaxed); }
+.lm-diffview__table caption, .lm-diffview__table th { text-align: left; padding: var(--lm-space-2) var(--lm-space-3); background: var(--lm-color-surface-sunken); }
+.lm-diffview__cell { vertical-align: top; padding: 0 var(--lm-space-3); white-space: pre; }
+.lm-diffview--split .lm-diffview__cell { width: 50%; }
+.lm-diffview__cell--remove { background: var(--lm-color-danger-soft); color: var(--lm-color-danger-text); }
+.lm-diffview__cell--add { background: var(--lm-color-success-soft); color: var(--lm-color-success-text); }
+.lm-diffview__number { display: inline-block; min-width: var(--lm-space-8); padding-right: var(--lm-space-2); color: var(--lm-color-text-muted); text-align: right; }
+.lm-diffview__ending { font-style: italic; }

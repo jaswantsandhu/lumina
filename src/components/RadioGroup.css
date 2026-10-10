@@ -1,0 +1,6 @@
+.lm-radio-group { display: grid; gap: var(--lm-space-3); }
+.lm-radio-group__option { display: flex; align-items: flex-start; gap: var(--lm-space-2); cursor: pointer; }
+.lm-radio-group__input { accent-color: var(--lm-color-accent); margin: var(--lm-space-0_5) 0 0; width: var(--lm-space-4); height: var(--lm-space-4); flex-shrink: 0; }
+.lm-radio-group__text { display: grid; gap: var(--lm-space-1); }
+.lm-radio-group__description { color: var(--lm-color-text-muted); font-size: var(--lm-font-size-sm); }
+.lm-radio-group__option:has(:disabled) { color: var(--lm-color-text-subtle); cursor: not-allowed; }

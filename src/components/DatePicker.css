@@ -1,0 +1,11 @@
+.lm-date-picker { justify-content: space-between; }
+.lm-date-picker__popover { z-index: var(--lm-z-dropdown); max-width: calc(100vw - var(--lm-space-4)); overflow: auto; padding: var(--lm-space-3); background: var(--lm-color-surface-raised); color: var(--lm-color-text); border: var(--lm-space-0_5) solid var(--lm-color-border); border-radius: var(--lm-radius-lg); box-shadow: var(--lm-shadow-lg); }
+.lm-date-picker__header { display: flex; align-items: center; justify-content: space-between; gap: var(--lm-space-3); font-weight: var(--lm-font-weight-semibold); }
+.lm-date-picker__calendar { border-collapse: collapse; margin-top: var(--lm-space-2); font-size: var(--lm-font-size-sm); }
+.lm-date-picker__calendar th { color: var(--lm-color-text-muted); font-weight: var(--lm-font-weight-medium); }
+.lm-date-picker__calendar td { padding: 0; }
+.lm-date-picker__day { width: var(--lm-size-control-md); height: var(--lm-size-control-md); padding: 0; border: 0; border-radius: var(--lm-radius-sm); background: transparent; color: var(--lm-color-text); cursor: pointer; }
+.lm-date-picker__day:hover:not(:disabled) { background: var(--lm-color-accent-soft); color: var(--lm-color-accent-soft-text); }
+.lm-date-picker__day--selected, .lm-date-picker__day--selected:hover:not(:disabled) { background: var(--lm-color-accent-solid); color: var(--lm-color-on-solid); }
+.lm-date-picker__day:disabled { color: var(--lm-color-text-subtle); opacity: 0.5; cursor: not-allowed; }
+.lm-date-picker__day:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); outline-offset: var(--lm-space-0_5); }

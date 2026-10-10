@@ -1,0 +1,10 @@
+.lm-jsontree { overflow: auto; color: var(--lm-color-text); background: var(--lm-color-surface); font-family: var(--lm-font-family-mono); font-size: var(--lm-font-size-sm); line-height: var(--lm-font-line-height-relaxed); }
+.lm-jsontree__root, .lm-jsontree__children { list-style: none; margin: 0; padding: 0; }
+.lm-jsontree__children { padding-inline-start: var(--lm-space-5); }
+.lm-jsontree__toggle { font: inherit; text-align: left; color: inherit; background: none; border: none; cursor: pointer; padding: var(--lm-space-1) var(--lm-space-2); }
+.lm-jsontree__toggle:hover { background: var(--lm-color-surface-sunken); }
+.lm-jsontree__toggle:focus-visible { outline: var(--lm-space-0_5) solid var(--lm-color-focus); }
+.lm-jsontree__value { display: block; padding: var(--lm-space-1) var(--lm-space-2); white-space: pre-wrap; overflow-wrap: anywhere; }
+.lm-jsontree__value--string { color: var(--lm-color-code-string); }
+.lm-jsontree__value--number { color: var(--lm-color-code-number); }
+.lm-jsontree__value--boolean, .lm-jsontree__value--null { color: var(--lm-color-code-keyword); }

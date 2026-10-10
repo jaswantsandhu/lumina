@@ -1,9 +1,71 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Card, CardHeader, Stack, Text } from "../src/index";
 import { tokens } from "../src/tokens";
+import { useState } from "react";
+import { Field } from "../src/components/Field";
+import { Breadcrumb } from "../src/components/Breadcrumb";
+import { RadioGroup } from "../src/components/RadioGroup";
+import { SegmentedControl } from "../src/components/SegmentedControl";
+import { Accordion } from "../src/components/Accordion";
+import { Pagination } from "../src/components/Pagination";
+import "../src/components/Breadcrumb.css";
+import "../src/components/RadioGroup.css";
+import "../src/components/SegmentedControl.css";
+import "../src/components/Accordion.css";
+import "../src/components/Pagination.css";
 
 const meta: Meta = { title: "Foundations/Tokens", parameters: { layout: "fullscreen" } };
 export default meta;
+
+export const BreadcrumbNavigation: StoryObj<typeof Breadcrumb> = {
+  render: () => <Card><Breadcrumb items={[{ label: "Home", href: "#home" }, { label: "Projects", href: "#projects" }, { label: "Lumina" }]} /></Card>,
+};
+
+export const RadioSelection: StoryObj<typeof RadioGroup> = {
+  render: function Render() {
+    const [value, setValue] = useState("weekly");
+    return <Card><Field label="Delivery schedule" hint="Choose how often to receive reports." required>
+      <RadioGroup aria-label="Delivery schedule" name="schedule" value={value} onValueChange={setValue} options={[
+        { value: "daily", label: "Daily", description: "A report every morning." },
+        { value: "weekly", label: "Weekly" },
+        { value: "monthly", label: "Monthly", disabled: true },
+      ]} />
+    </Field></Card>;
+  },
+};
+
+export const SegmentedSelection: StoryObj<typeof SegmentedControl> = {
+  render: function Render() {
+    const [value, setValue] = useState("list");
+    return <Card><SegmentedControl label="Display mode" value={value} onValueChange={setValue} items={[
+      { value: "list", label: "List" }, { value: "grid", label: "Grid" }, { value: "map", label: "Map", disabled: true },
+    ]} /><Text>Selected: {value}</Text></Card>;
+  },
+};
+
+const accordionItems = [
+  { value: "setup", label: "Getting started", content: "Install Lumina and load its styles." },
+  { value: "themes", label: "Themes", content: "Semantic tokens adapt to light and dark themes." },
+  { value: "future", label: "Coming soon", content: "More examples.", disabled: true },
+];
+
+export const AccordionSingle: StoryObj<typeof Accordion> = {
+  render: () => <Card><Accordion items={accordionItems} defaultValue={["setup"]} /></Card>,
+};
+
+export const AccordionMultiple: StoryObj<typeof Accordion> = {
+  render: function Render() {
+    const [value, setValue] = useState(["setup", "themes"]);
+    return <Card><Accordion items={accordionItems} multiple value={value} onValueChange={setValue} /></Card>;
+  },
+};
+
+export const PageNavigation: StoryObj<typeof Pagination> = {
+  render: function Render() {
+    const [page, setPage] = useState(1);
+    return <Card><Stack gap="3"><Text>Page {page} of 20</Text><Pagination page={page} pageCount={20} onPageChange={setPage} /></Stack></Card>;
+  },
+};
 
 const Swatch = ({ name, value }: { name: string; value: string }) => (
   <Stack gap="1" style={{ width: 132 }}>
